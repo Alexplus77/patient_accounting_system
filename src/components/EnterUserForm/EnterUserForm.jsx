@@ -23,10 +23,10 @@ const EnterUserForm = () => {
         layout="horizontal"
       >
         <Form.Item label={<label>Логин</label>} name={"name"}>
-          <Input />
+          <Input placeholder="Логин" />
         </Form.Item>
         <Form.Item label={<label>Выберите роль</label>} name="select-role">
-          <Select placeholder="Select a option ">
+          <Select placeholder="Select a option">
             <Select.Option value="superAdmin">
               Супер Администратор
             </Select.Option>
@@ -35,7 +35,7 @@ const EnterUserForm = () => {
           </Select>
         </Form.Item>
         <Form.Item label={<label>Пароль</label>} name={"password"}>
-          <Input.Password />
+          <Input.Password placeholder="Пароль" />
         </Form.Item>
         <Form.Item>
           <div className="btn-group">
