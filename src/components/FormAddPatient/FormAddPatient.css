@@ -1,9 +1,11 @@
 
 label{
     color: white;
+font-size: 18px;
 }
 .form-enter-user{
     display: grid;
+    margin-top: 30px;
     position: absolute;
     width: 400px;
     padding: 20px;
@@ -11,6 +13,7 @@ label{
 }
 .container-form-addPatient{
     position: relative;
+    display: grid;
     margin-top:2%;
     margin-left: 100px;
     width: 400px;
@@ -20,15 +23,16 @@ label{
     position: fixed;
     background-color: #161616;
     width: 400px;
-    height: 500px;
+    height: 520px;
     opacity: 60%;
+    z-index: 0;
+}
+.title{
+    position: absolute;
+    margin-top: 10px;
+    color: white;
+    justify-self: center;
 }
 label{
     color: white;
-}
-.btn-group{
-    display: grid;
-    justify-self: center;
-    grid-auto-flow: column;
-    gap: 20px;
 }

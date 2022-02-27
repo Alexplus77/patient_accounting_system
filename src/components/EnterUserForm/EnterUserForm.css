@@ -22,6 +22,7 @@ position: fixed;
 }
 label{
     color: white;
+    font-size: 18px;
 }
 .btn-group{
     display: grid;
