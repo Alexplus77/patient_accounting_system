@@ -9,14 +9,14 @@ label{
     padding: 20px;
 
 }
-.container-form{
+.container-form-addPatient{
     position: relative;
     margin-top:2%;
     margin-left: 100px;
     width: 400px;
     justify-self: center;
 }
-.background{
+.background-form{
     position: fixed;
     background-color: #161616;
     width: 400px;

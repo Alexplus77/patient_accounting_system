@@ -12,11 +12,11 @@ const FormAddPatient = () => {
     console.log("Failed:", errorInfo);
   };
   return (
-    <div className="container-form">
-      <div className="background" />
+    <div className="container-form-addPatient">
+      <div className="background-form" />
       <Form
         className="form-enter-user"
-        name="basic"
+        name="form-addPatient"
         initialValues={{ remember: true }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
@@ -60,14 +60,14 @@ const FormAddPatient = () => {
             <Select.Option value="Женский">Женский</Select.Option>
           </Select>
         </Form.Item>
-        <Form.Item label={<label>Группа клиентов</label>} name={"sex"}>
+        <Form.Item label={<label>Группа клиентов</label>} name={"group-client"}>
           <Select>
             <Select.Option value="VIP">VIP</Select.Option>
             <Select.Option value="Проблемные">Проблемные</Select.Option>
             <Select.Option value="ОМС">ОМС</Select.Option>
           </Select>
         </Form.Item>
-        <Form.Item label={<label>Врачи</label>} name={"sex"}>
+        <Form.Item label={<label>Врачи</label>} name={"doctor"}>
           <Select>
             <Select.Option value={"Ковалев"}>Ковалев А.П.</Select.Option>
             <Select.Option value={"Левашова"}>Левашова А.В.</Select.Option>
