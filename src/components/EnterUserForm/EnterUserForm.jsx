@@ -1,6 +1,7 @@
 import React from "react";
 import { Form, Input, Select, Button } from "antd";
 import "./EnterUserForm.css";
+import { Link } from "react-router-dom";
 
 const EnterUserForm = () => {
   const onFinish = (values) => {
@@ -39,7 +40,9 @@ const EnterUserForm = () => {
         </Form.Item>
         <Form.Item>
           <div className="btn-group">
-            <Button>Войти</Button>
+            <Button>
+              <Link to={"/administrator"}> Войти</Link>
+            </Button>
             <Button>Регистрация</Button>
           </div>
         </Form.Item>

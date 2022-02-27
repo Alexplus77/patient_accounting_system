@@ -1,0 +1,34 @@
+
+label{
+    color: white;
+}
+.form-enter-user{
+    display: grid;
+    position: absolute;
+    width: 400px;
+    padding: 20px;
+
+}
+.container-form{
+    position: relative;
+    margin-top:2%;
+    margin-left: 100px;
+    width: 400px;
+    justify-self: center;
+}
+.background{
+    position: fixed;
+    background-color: #161616;
+    width: 400px;
+    height: 500px;
+    opacity: 60%;
+}
+label{
+    color: white;
+}
+.btn-group{
+    display: grid;
+    justify-self: center;
+    grid-auto-flow: column;
+    gap: 20px;
+}
