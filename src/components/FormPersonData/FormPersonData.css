@@ -2,7 +2,7 @@ label{
     color: white;
     font-size: 18px;
 }
-.form-passport{
+.form-enter-user{
     display: grid;
     margin-top: 30px;
     position: absolute;
@@ -10,7 +10,7 @@ label{
     padding: 20px;
 
 }
-.container-formPassport{
+.container-form-addPatient{
     position: relative;
     display: grid;
     margin-top:2%;
@@ -21,6 +21,7 @@ label{
     position: fixed;
     background-color: #161616;
     width: 400px;
+    height: 500px;
     opacity: 60%;
     z-index: 0;
 }
@@ -33,12 +34,9 @@ label{
 label{
     color: white;
 }
-.btn-form-passport{
+
+.btn-submit{
+    margin-left: 70%;
     margin-top: 100px;
-    display: grid;
-   gap: 20px;
-    grid-auto-flow: column;
-}
-.btn{
-    background-color: #abaaaa;
+    background-color: #c7c5c5;
 }

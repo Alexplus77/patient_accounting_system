@@ -1,50 +1,10 @@
 
-label{
-    color: white;
-font-size: 18px;
-}
-.form-enter-user{
-    display: grid;
-    margin-top: 30px;
-    position: absolute;
-    width: 400px;
-    padding: 20px;
 
-}
-.container-form-addPatient{
-    position: relative;
-    display: grid;
-    margin-top:2%;
-    width: 400px;
-
-}
-.background-form{
-    position: fixed;
-    background-color: #161616;
-    width: 400px;
-    height: 500px;
-    opacity: 60%;
-    z-index: 0;
-}
-.title{
-    position: absolute;
-    margin-top: 10px;
-    color: white;
-    justify-self: center;
-}
-label{
-    color: white;
-}
 .container-forms-addPatient{
     display: grid;
    margin-left: 50px;
    grid-template-columns: repeat(3, 400px);
     grid-template-rows: 500px auto;
-    gap: 10px;
-
-}
-.btn-submit{
-    grid-column: 3/4;
-    align-self: center;
+    gap: 20px;
 
 }

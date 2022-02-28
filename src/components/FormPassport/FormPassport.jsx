@@ -25,7 +25,7 @@ const FormPassport = () => {
       <h2 className="title">Паспорт</h2>
       <Form
         className="form-passport"
-        name="form-passport"
+        name="formPassport"
         initialValues={{ remember: true }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
@@ -62,6 +62,16 @@ const FormPassport = () => {
           rules={[{ required: true, message: "Не указали дату выдачи" }]}
         >
           <DatePicker style={{ width: "100%" }} />
+        </Form.Item>
+        <Form.Item>
+          <div className="btn-form-passport">
+            <Button className="btn" htmlType={"button"}>
+              Очистить форму
+            </Button>
+            <Button className="btn" htmlType={"submit"}>
+              Отправить
+            </Button>
+          </div>
         </Form.Item>
       </Form>
     </div>
