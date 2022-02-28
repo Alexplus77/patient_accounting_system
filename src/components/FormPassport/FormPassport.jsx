@@ -11,7 +11,7 @@ import {
 } from "antd";
 import "./FormPassport.css";
 
-const FormPassport = () => {
+const FormPassport = ({ formsValue, clearForm }) => {
   const onFinish = (values) => {
     console.log("Success:", values);
   };
@@ -65,7 +65,11 @@ const FormPassport = () => {
         </Form.Item>
         <Form.Item>
           <div className="btn-form-passport">
-            <Button className="btn" htmlType={"button"}>
+            <Button
+              onClick={() => clearForm(formsValue)}
+              className="btn"
+              htmlType={"button"}
+            >
               Очистить форму
             </Button>
             <Button className="btn" htmlType={"submit"}>

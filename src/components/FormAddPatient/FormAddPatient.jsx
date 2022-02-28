@@ -3,10 +3,13 @@ import { FormAddress } from "components/FormAddress";
 import { FormPassport } from "components/FormPassport";
 import { FormPersonData } from "components/FormPersonData";
 import { Form } from "antd";
+import { useDispatch } from "react-redux";
+import { fetchPostPatient } from "redux/middlewares/fetchPostPatient";
 import "./FormAddPatient.css";
 
 const FormAddPatient = () => {
-  const [clear, setClear] = useState(false);
+  const dispatch = useDispatch();
+  const [formsValue, setForms] = useState({});
   const clearForms = ({ formAddress, formPassport, formPersonData }) => {
     formPassport.resetFields();
     formAddress.resetFields();
@@ -15,8 +18,7 @@ const FormAddPatient = () => {
   return (
     <Form.Provider
       onFormChange={(name, { forms }) => {
-        const { formAddress, formPassport, formPersonData } = forms;
-        clear && clearForms({ formAddress, formPassport, formPersonData });
+        setForms({ ...formsValue, ...forms });
       }}
       onFormFinish={(name, { values, forms }) => {
         const { formAddress, formPassport, formPersonData } = forms;
@@ -25,6 +27,7 @@ const FormAddPatient = () => {
           ...formAddress.getFieldsValue(),
           ...formPassport.getFieldsValue(),
         };
+        dispatch(fetchPostPatient(valueUser));
         clearForms({ formAddress, formPassport, formPersonData });
 
         //console.log(valueUser);
@@ -40,7 +43,7 @@ const FormAddPatient = () => {
       <div className="container-forms-addPatient">
         <FormPersonData />
         <FormAddress />
-        <FormPassport />
+        <FormPassport formsValue={formsValue} clearForm={clearForms} />
       </div>
     </Form.Provider>
   );
