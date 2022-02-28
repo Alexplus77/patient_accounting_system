@@ -40,5 +40,6 @@ label{
     grid-auto-flow: column;
 }
 .btn{
-    background-color: #abaaaa;
+    background-color: rgba(14, 14, 14, 0.31);
+    color: white;
 }
