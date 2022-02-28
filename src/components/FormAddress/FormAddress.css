@@ -21,7 +21,6 @@ label{
     position: fixed;
     background-color: #161616;
     width: 400px;
-    height: 500px;
     opacity: 60%;
     z-index: 0;
 }

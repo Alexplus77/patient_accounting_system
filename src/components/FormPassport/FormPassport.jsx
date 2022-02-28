@@ -33,72 +33,35 @@ const FormPassport = () => {
         layout="horizontal"
       >
         <Form.Item
-          rules={[{ required: true, message: "Не указали фамилию" }]}
-          label={<label style={{ fontSize: "16px" }}>Фамилия</label>}
-          name={"lastName"}
+          rules={[{ required: true, message: "Не указали тип документа" }]}
+          label={<label>Тип документа</label>}
+          name={"documentType"}
         >
-          <Input style={{ fontSize: "16px" }} placeholder="Введите фамилию" />
+          <Select placeholder="Тип документа">
+            <Select.Option value={"passport"}>Паспорт</Select.Option>
+            <Select.Option value={"birth certificate"}>
+              Сертификат о рождении
+            </Select.Option>
+            <Select.Option value={"driver's license"}>
+              Водительское удостоверение
+            </Select.Option>
+          </Select>
+        </Form.Item>
+        <Form.Item label={<label>Серия</label>} name={"series"}>
+          <Input placeholder="Серия" />
+        </Form.Item>
+        <Form.Item label={<label>Номер</label>} name={"numberDoc"}>
+          <Input placeholder="Номер" />
+        </Form.Item>
+        <Form.Item label={<label>Кем выдан</label>} name={"issuedByWhom"}>
+          <Input placeholder="Кем выдан" />
         </Form.Item>
         <Form.Item
-          label={<label style={{ fontSize: "16px" }}>Имя</label>}
-          name={"name"}
-          rules={[{ required: true, message: "Не указали фамилию" }]}
-        >
-          <Input style={{ fontSize: "16px" }} placeholder="Введите имя" />
-        </Form.Item>
-        <Form.Item
-          label={<label style={{ fontSize: "16px" }}>Отчество</label>}
-          name={"patronymic"}
-        >
-          <Input style={{ fontSize: "16px" }} placeholder="Введите отчество" />
-        </Form.Item>
-        <Form.Item
-          label={<label style={{ fontSize: "16px" }}>Дата рождения</label>}
-          name="dob"
-          rules={[{ required: true, message: "Не указали дату рождения" }]}
+          label={<label>Дата выдачи</label>}
+          name="dateOfIssue"
+          rules={[{ required: true, message: "Не указали дату выдачи" }]}
         >
           <DatePicker style={{ width: "100%" }} />
-        </Form.Item>
-        <Form.Item
-          label={<label style={{ fontSize: "16px" }}>Номер телефона</label>}
-          name={"phone"}
-          rules={[{ required: true, message: "Не указали номер телефона" }]}
-        >
-          <InputNumber
-            style={{ fontSize: "16px" }}
-            addonBefore={<i>+7</i>}
-            type="number"
-            placeholder="Введите номер телефона"
-          />
-        </Form.Item>
-        <Form.Item
-          label={<label style={{ fontSize: "16px" }}>Пол</label>}
-          name={"sex"}
-        >
-          <Select style={{ fontSize: "16px" }}>
-            <Select.Option value="Мужской">Мужской</Select.Option>
-            <Select.Option value="Женский">Женский</Select.Option>
-          </Select>
-        </Form.Item>
-        <Form.Item
-          label={<label style={{ fontSize: "16px" }}>Группа клиентов</label>}
-          name={"group-client"}
-        >
-          <Select style={{ fontSize: "16px" }}>
-            <Select.Option value="VIP">VIP</Select.Option>
-            <Select.Option value="Проблемные">Проблемные</Select.Option>
-            <Select.Option value="ОМС">ОМС</Select.Option>
-          </Select>
-        </Form.Item>
-        <Form.Item
-          label={<label style={{ fontSize: "16px" }}>Врачи</label>}
-          name={"doctor"}
-        >
-          <Select style={{ fontSize: "16px" }}>
-            <Select.Option value={"Ковалев"}>Ковалев А.П.</Select.Option>
-            <Select.Option value={"Левашова"}>Левашова А.В.</Select.Option>
-            <Select.Option value={"Иванов И.И."}>Иванов И.И.</Select.Option>
-          </Select>
         </Form.Item>
       </Form>
     </div>

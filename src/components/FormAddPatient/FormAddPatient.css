@@ -15,7 +15,6 @@ font-size: 18px;
     position: relative;
     display: grid;
     margin-top:2%;
-
     width: 400px;
 
 }
@@ -23,7 +22,7 @@ font-size: 18px;
     position: fixed;
     background-color: #161616;
     width: 400px;
-    height: 520px;
+    height: 500px;
     opacity: 60%;
     z-index: 0;
 }
@@ -41,7 +40,7 @@ label{
    margin-left: 50px;
    grid-template-columns: repeat(3, 400px);
     grid-template-rows: 500px auto;
-    gap: 20px;
+    gap: 10px;
 
 }
 .btn-submit{
