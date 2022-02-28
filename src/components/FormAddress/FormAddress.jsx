@@ -25,7 +25,7 @@ const FormAddress = () => {
       <h2 className="title">Адрес</h2>
       <Form
         className="form-address"
-        name="form-addPatient"
+        name="formAddress"
         initialValues={{ remember: true }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}

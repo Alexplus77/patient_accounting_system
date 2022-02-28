@@ -22,13 +22,24 @@ const FormAddPatient = () => {
     console.log("Failed:", errorInfo);
   };
   return (
-    <Form.Provider>
+    <Form.Provider
+      onFormFinish={(name, { values, forms }) => {
+        const { formAddress } = forms;
+        const valueUser = formAddress.getFieldValue();
+        console.log(valueUser);
+        if (name === "userForm") {
+          const { basicForm } = forms;
+          const users = basicForm.getFieldValue("users") || [];
+          basicForm.setFieldsValue({ users: [...users, values] });
+          // setVisible(false);
+        }
+      }}
+    >
       <div className="container-forms-addPatient">
         <div className="container-form-addPatient">
           <div className="background-form" />
           <h2 className="title">Паспортные данные</h2>
           <Form
-            title="Паспортные данные"
             className="form-enter-user"
             name="form-addPatient"
             initialValues={{ remember: true }}
@@ -98,13 +109,15 @@ const FormAddPatient = () => {
                 <Select.Option value={"Иванов И.И."}>Иванов И.И.</Select.Option>
               </Select>
             </Form.Item>
+            <Form.Item>
+              <Button className="btn-submit" htmlType={"submit"}>
+                Отправить
+              </Button>
+            </Form.Item>
           </Form>
         </div>
         <FormAddress />
         <FormPassport />
-        <Button className="btn-submit" htmlType={"submit"}>
-          Отправить
-        </Button>
       </div>
     </Form.Provider>
   );
