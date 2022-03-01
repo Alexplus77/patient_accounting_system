@@ -1,12 +1,21 @@
 .header-container{
     display: grid;
+    grid-auto-flow: column;
     height: 100px;
     width: 100%;
     padding-left: 10px;
     align-items: center;
-    /*border: 2px white solid;*/
+
 }
 .logo{
     color: white;
     font-size: 50px;
+}
+.nav-link{
+    font-size: 20px;
+    color: white;
+}
+.nav-link:hover{
+    font-size: 22px;
+    color: #a09f9f;
 }

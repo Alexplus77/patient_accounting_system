@@ -11,9 +11,6 @@ const AdministratorPage = () => {
     <div className="container-administratorPage">
       <div>
         <TableListPatients />
-        <Button>
-          <Link to={"/addNewPatient"}>Новый пациент</Link>
-        </Button>
       </div>
     </div>
   );

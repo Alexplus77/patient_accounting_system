@@ -1,0 +1,24 @@
+.table-container{
+    display: grid;
+    justify-items: center;
+    width: 1300px;
+margin-left: 20px;
+}
+.title-table{
+    color: white;
+}
+.address-cell{
+    display: grid;
+}
+.icon-group{
+    display: grid;
+    grid-auto-flow: column;
+}
+.icon-delete{
+    cursor: pointer;
+    font-size: 20px;
+}
+.icon-delete:hover{
+    font-size: 22px;
+    color: blue;
+}
