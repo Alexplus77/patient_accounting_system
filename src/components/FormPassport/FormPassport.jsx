@@ -10,6 +10,7 @@ import {
   InputNumber,
 } from "antd";
 import "./FormPassport.css";
+import { Link } from "react-router-dom";
 
 const FormPassport = ({ formsValue, clearForm }) => {
   const onFinish = (values) => {
@@ -47,7 +48,7 @@ const FormPassport = ({ formsValue, clearForm }) => {
             </Select.Option>
           </Select>
         </Form.Item>
-        <Form.Item label={<label>Серия</label>} name={"series"}>
+        <Form.Item label={<label>Серия</label>} name={"seriesDocument"}>
           <Input placeholder="Серия" />
         </Form.Item>
         <Form.Item label={<label>Номер</label>} name={"numberDoc"}>
@@ -65,6 +66,9 @@ const FormPassport = ({ formsValue, clearForm }) => {
         </Form.Item>
         <Form.Item>
           <div className="btn-form-passport">
+            <Button className={"btn"}>
+              <Link to={"/administrator"}>Отмена</Link>
+            </Button>
             <Button
               onClick={() => clearForm(formsValue)}
               className="btn"

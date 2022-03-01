@@ -6,6 +6,7 @@ import { Form } from "antd";
 import { useDispatch } from "react-redux";
 import { fetchPostPatient } from "redux/middlewares/fetchPostPatient";
 import "./FormAddPatient.css";
+import { useNavigate } from "react-router-dom";
 
 const FormAddPatient = () => {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ const FormAddPatient = () => {
     formAddress.resetFields();
     formPersonData.resetFields();
   };
+  const navigate = useNavigate();
   return (
     <Form.Provider
       onFormChange={(name, { forms }) => {
@@ -29,7 +31,7 @@ const FormAddPatient = () => {
         };
         dispatch(fetchPostPatient(valueUser));
         clearForms({ formAddress, formPassport, formPersonData });
-
+        navigate("/administrator");
         //console.log(valueUser);
 
         // if (name === "userForm") {

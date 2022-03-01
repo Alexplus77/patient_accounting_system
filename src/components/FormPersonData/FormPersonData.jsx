@@ -42,14 +42,14 @@ const FormPersonData = () => {
         </Form.Item>
         <Form.Item
           label={<label>Дата рождения</label>}
-          name="dob"
+          name="dateOfBirth"
           rules={[{ required: true, message: "Не указали дату рождения" }]}
         >
           <DatePicker style={{ width: "100%" }} />
         </Form.Item>
         <Form.Item
           label={<label>Номер телефона</label>}
-          name={"phone"}
+          name={"phoneNumber"}
           rules={[{ required: true, message: "Не указали номер телефона" }]}
         >
           <InputNumber
@@ -64,7 +64,7 @@ const FormPersonData = () => {
             <Select.Option value="Женский">Женский</Select.Option>
           </Select>
         </Form.Item>
-        <Form.Item label={<label>Группа клиентов</label>} name={"group-client"}>
+        <Form.Item label={<label>Группа клиентов</label>} name={"groupClient"}>
           <Select>
             <Select.Option value="VIP">VIP</Select.Option>
             <Select.Option value="Проблемные">Проблемные</Select.Option>

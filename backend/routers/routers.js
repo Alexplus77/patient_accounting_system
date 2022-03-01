@@ -1,16 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const { v4: uuidv4 } = require("uuid");
-const { db } = require("../db");
-router.post("/addUsers", (req, res) => {
-  try {
-    db.push({ id: uuidv4(), ...req.body });
-    res.status(200).send(db);
-  } catch (e) {
-    res
-      .status(400)
-      .send({ error: "Не удалось добавить пациента в базу данных" });
-  }
-});
+const controller_addPatient = require("../controllers/controller_addNewPatient");
+const controller_getPatientList = require("../controllers/controller_getPatientList");
+
+router.post("/newPatient", controller_addPatient.controllerAddNewPatient);
+router.get("/patientList", controller_getPatientList.controller_getPatientList);
 
 module.exports = router;

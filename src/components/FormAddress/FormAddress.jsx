@@ -38,7 +38,7 @@ const FormAddress = () => {
         <Form.Item label={<label>Страна</label>} name={"country"}>
           <Input placeholder="Страна" />
         </Form.Item>
-        <Form.Item label={<label>Область</label>} name={"aria"}>
+        <Form.Item label={<label>Область</label>} name={"region"}>
           <Input placeholder="Область" />
         </Form.Item>
         <Form.Item
@@ -51,7 +51,7 @@ const FormAddress = () => {
         <Form.Item label={<label>Улица</label>} name={"street"}>
           <Input placeholder="Улица" />
         </Form.Item>
-        <Form.Item label={<label>Номер дома</label>} name={"number"}>
+        <Form.Item label={<label>Номер дома</label>} name={"numberHouse"}>
           <InputNumber type={"number"} placeholder="Номер дома" />
         </Form.Item>
       </Form>
