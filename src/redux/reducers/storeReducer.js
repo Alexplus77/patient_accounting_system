@@ -15,7 +15,7 @@ const storeReducer = (state = initialState, action) => {
     case FETCH_GET_PATIENTS_LIST:
       return {
         ...state,
-        patientList: [...state.patientList, ...action.payload],
+        patientList: [...action.payload],
         isAddPatient: false,
       };
 

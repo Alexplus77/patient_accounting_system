@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 exports.controllerAddNewPatient = async (req, res) => {
   try {
     const newPatient = new PatientModel({
-      _id: new mongoose.Types.ObjectId(),
       patientPersonalData: {
         ...req.body,
       },

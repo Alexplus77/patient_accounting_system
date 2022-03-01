@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 
 const schemaPatient = mongoose.Schema({
-  _id: mongoose.Schema.Types.ObjectId,
   patientPersonalData: {
     lastName: String,
     name: String,

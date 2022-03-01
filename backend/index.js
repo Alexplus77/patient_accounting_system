@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(router);
 mongoose
   .connect(
-    "mongodb+srv://alexplus77:A27021986@cluster0.6ztnl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+    "mongodb+srv://alexsuf:A27021986@cluster0.3uuhf.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
   )
   .then(() => {
     app.listen(PORT, () =>
