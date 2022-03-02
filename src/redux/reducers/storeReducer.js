@@ -1,12 +1,13 @@
 import {
   FETCH_GET_PATIENTS_LIST,
   FETCH_NEW_PATIENT,
+  FETCH_SELECTED_PATIENT,
 } from "redux/actions/actionsTypes";
 
 const initialState = {
   users: [],
   patientList: [],
-  isAddPatient: false,
+  selectedPatient: {},
 };
 const storeReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -18,6 +19,8 @@ const storeReducer = (state = initialState, action) => {
         patientList: [...action.payload],
         isAddPatient: false,
       };
+    case FETCH_SELECTED_PATIENT:
+      return { ...state, selectedPatient: action.payload };
 
     default:
       return state;

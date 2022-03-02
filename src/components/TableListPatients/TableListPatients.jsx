@@ -1,21 +1,31 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchGetPatientList } from "redux/middlewares/fetchGetPatientList";
+import { fetchDeletePatient } from "redux/middlewares/fetchDeletePatient";
 import { Table, Typography } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import "./TableListPatient.css";
+import { Link } from "react-router-dom";
 
 const TableListPatients = () => {
   const dispatch = useDispatch();
-  const { patientList } = useSelector((state) => state.storeReducer);
+  const { patientList, selectedPatient } = useSelector(
+    (state) => state.storeReducer
+  );
+
   useEffect(() => {
     dispatch(fetchGetPatientList());
-  }, []);
+  }, [selectedPatient]);
 
+  const handleRemovePatient = (id) => {
+    dispatch(fetchDeletePatient(id));
+  };
   const columns = [
     {
       title: "Фамилия",
-      dataIndex: "lastName",
+      render: (text, record) => (
+        <Link to={`/patientCard${record.id}`}>{record.lastName}</Link>
+      ),
       key: "lastName",
     },
     {
@@ -51,10 +61,13 @@ const TableListPatients = () => {
     {
       title: "Действия",
       key: "actions",
-      render: () => (
+      render: (text, record) => (
         <div className="icon-group">
-          <DeleteOutlined className="icon-delete" />
-          <EditOutlined className="icon-delete" />
+          <DeleteOutlined
+            onClick={() => handleRemovePatient(record.id)}
+            className="icon"
+          />
+          <EditOutlined className="icon" />
         </div>
       ),
     },

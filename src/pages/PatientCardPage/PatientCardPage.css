@@ -1,0 +1,8 @@
+.title-card-patient{
+    display: grid;
+    grid-auto-flow: column;
+}
+.card-container{
+    justify-self: center;
+    height: 60vh;
+}
