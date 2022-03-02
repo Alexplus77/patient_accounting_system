@@ -3,13 +3,10 @@
     position: absolute;
     width: 400px;
     padding: 20px;
-
 }
 .container-form{
     position: relative;
-    margin-top:7%;
     width: 400px;
-
     justify-self: center;
 
 }

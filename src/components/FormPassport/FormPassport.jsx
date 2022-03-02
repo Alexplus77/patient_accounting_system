@@ -39,11 +39,11 @@ const FormPassport = ({ formsValue, clearForm }) => {
           name={"documentType"}
         >
           <Select placeholder="Тип документа">
-            <Select.Option value={"passport"}>Паспорт</Select.Option>
-            <Select.Option value={"birth certificate"}>
+            <Select.Option value={"Паспорт"}>Паспорт</Select.Option>
+            <Select.Option value={"Свидетельство о рождении"}>
               Сертификат о рождении
             </Select.Option>
-            <Select.Option value={"driver's license"}>
+            <Select.Option value={"Водительское удостоверение"}>
               Водительское удостоверение
             </Select.Option>
           </Select>
