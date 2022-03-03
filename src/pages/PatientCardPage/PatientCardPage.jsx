@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./PatientCardPage.css";
-import { Card, Row, Col, Typography } from "antd";
-import { useParams } from "react-router-dom";
+import { Card, Row, Col, Typography, Button } from "antd";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPatientById } from "redux/middlewares/fetchPatientById";
 import { titleTablePatient } from "commonsFiles/titleTablePatient";
@@ -15,56 +15,50 @@ const PatientCardPage = () => {
     dispatch(fetchPatientById(params.id));
   }, []);
   const { patientPersonalData } = selectedPatient;
+  console.log(patientPersonalData);
   return (
     <div className="card-page-container">
       <Typography.Title style={{ justifySelf: "center" }}>
         <div className="title-card-patient">
-          <i>{patientPersonalData?.lastName}</i>
-          <i>{patientPersonalData?.name}</i>
-          <i>{patientPersonalData?.patronymic}</i>
+          <i>{patientPersonalData?.personData.lastName}</i>
+          <i>{patientPersonalData?.personData.name}</i>
+          <i style={{ width: "200px" }}>
+            {patientPersonalData?.personData.patronymic}
+          </i>
         </div>
       </Typography.Title>
       <div className="card-container">
-        <Row>
-          <Col>
-            <Card title={"Личные данные"} style={{ height: "100%" }}>
-              {patientPersonalData &&
-                Object.entries(titleTablePatient)
-                  .slice(0, 8)
-                  .map((title) => (
-                    <p key={title[0]}>
-                      {title[1]}:{" "}
-                      {patientPersonalData[title[0]] || "не указано"}
-                    </p>
-                  ))}
-            </Card>
-          </Col>
-          <Col>
-            <Card title={"Адресс"} style={{ height: "100%" }}>
-              {patientPersonalData &&
-                Object.entries(titleTablePatient)
-                  .slice(9, 14)
-                  .map((title) => (
-                    <p key={title[0]}>
-                      {title[1]}:{" "}
-                      {patientPersonalData[title[0]] || "не указано"}
-                    </p>
-                  ))}
-            </Card>
-          </Col>
-          <Col>
-            <Card title={"Паспортные данные"} style={{ height: "100%" }}>
-              {patientPersonalData &&
-                Object.entries(titleTablePatient)
-                  .slice(14, 19)
-                  .map((title) => (
-                    <p key={title[0]}>
-                      {title[1]}:{" "}
-                      {patientPersonalData[title[0]] || "не указано"}
-                    </p>
-                  ))}
-            </Card>
-          </Col>
+        <div className="background-card" />
+        <Row className="rowCard">
+          {patientPersonalData &&
+            Object.entries(titleTablePatient).map((el) => {
+              const rowsCard = Object.entries(el[1]);
+              rowsCard.splice(0, 1);
+              return (
+                <Col className="columns-card">
+                  <Card
+                    className="card-patient"
+                    title={<i style={{ color: "white" }}>{el[1].title}</i>}
+                  >
+                    {rowsCard.map((elem) => (
+                      <p>
+                        {elem[1]}:{" "}
+                        {patientPersonalData[el[0]][elem[0]] || "Не указано"}{" "}
+                      </p>
+                    ))}
+                  </Card>
+                </Col>
+              );
+            })}
+          <div className="btns-patient-card">
+            <Button className="btn">Изменить</Button>
+            <Button className="btn">Удалить</Button>{" "}
+            <Link to={"/administrator"}>
+              <Button className="btn" style={{ width: "100px" }}>
+                Назад
+              </Button>
+            </Link>
+          </div>
         </Row>
       </div>
     </div>

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchGetPatientList } from "redux/middlewares/fetchGetPatientList";
 import { fetchDeletePatient } from "redux/middlewares/fetchDeletePatient";
 import { Table, Typography } from "antd";
+import { titleTablePatient } from "commonsFiles/titleTablePatient";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import "./TableListPatient.css";
 import { Link } from "react-router-dom";
@@ -22,42 +23,62 @@ const TableListPatients = () => {
   };
   const columns = [
     {
-      title: "Фамилия",
-      render: (text, record) => (
-        <Link to={`/patientCard${record.id}`}>{record.lastName}</Link>
+      title: "Личные данные",
+      children: [
+        {
+          title: "Фамилия",
+          render: (text, { personData }) => (
+            <Link to={`/patientCard${text.id}`}>{personData.lastName}</Link>
+          ),
+        },
+        {
+          title: "Имя",
+          render: (text, { personData }) => <i>{personData.name}</i>,
+        },
+        {
+          title: "Отчество",
+          render: (text, { personData }) => (
+            <i>{personData.patronymic || "Не указано"}</i>
+          ),
+        },
+        {
+          title: "Год рождения",
+          render: (text, { personData }) => (
+            <i>{personData.dateOfBirth || "Не указано"}</i>
+          ),
+        },
+      ],
+    },
+    {
+      title: "Адресс",
+      children: [
+        {
+          title: "Город",
+          render: (text, { addressData }) => (
+            <i>{addressData.city || "Не указано"}</i>
+          ),
+        },
+        {
+          title: "Улица",
+          render: (text, { addressData }) => (
+            <i>{addressData.street || "Не указано"}</i>
+          ),
+        },
+        {
+          title: "Номер",
+          render: (text, { addressData }) => (
+            <i>{addressData.numberHouse || "Не указано"}</i>
+          ),
+        },
+      ],
+    },
+    {
+      title: "Врач",
+      render: (text, { personData }) => (
+        <i>{personData.doctor || "Не указано"}</i>
       ),
-      key: "lastName",
     },
-    {
-      title: "Имя",
-      dataIndex: "name",
-      key: "name",
-    },
-    {
-      title: "Отчество",
-      dataIndex: "patronymic",
-      key: "patronymic",
-    },
-    {
-      title: "Дата рождения",
-      dataIndex: "dateOfBirth",
-      key: "dateOfBirth",
-    },
-    {
-      title: "Номер телефона",
-      dataIndex: "phoneNumber",
-      key: "phoneNumber",
-    },
-    {
-      title: "Адрес",
-      key: "address",
-      dataIndex: "city",
-    },
-    {
-      title: "Записан к врачу",
-      dataIndex: "doctor",
-      key: "doctor",
-    },
+
     {
       title: "Действия",
       key: "actions",
@@ -79,6 +100,7 @@ const TableListPatients = () => {
         <Typography.Title level={2}>
           <i className="title-table">Список пациентов</i>
         </Typography.Title>
+
         <Table
           style={{ width: "1100px" }}
           dataSource={patientList.map((el) => {

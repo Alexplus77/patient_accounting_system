@@ -25,9 +25,9 @@ const FormAddPatient = () => {
       onFormFinish={(name, { values, forms }) => {
         const { formAddress, formPassport, formPersonData } = forms;
         const valueUser = {
-          ...formPersonData.getFieldsValue(),
-          ...formAddress.getFieldsValue(),
-          ...formPassport.getFieldsValue(),
+          personData: formPersonData.getFieldsValue(),
+          addressData: formAddress.getFieldsValue(),
+          passportData: formPassport.getFieldsValue(),
         };
         dispatch(fetchPostPatient(valueUser));
         clearForms({ formAddress, formPassport, formPersonData });
