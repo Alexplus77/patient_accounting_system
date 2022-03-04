@@ -9,7 +9,6 @@ justify-self: center;
     grid-auto-flow: column;
 gap: 10px;
     justify-self: center;
-    width: 400px;
     color: white;
 }
 .card-container{

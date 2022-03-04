@@ -72,7 +72,7 @@ const FormPassport = ({ clearForms, valueForm }) => {
         <Form.Item>
           <div className="btn-form-passport">
             <Button className={"btn"}>
-              <Link to={"/administrator"}>Отмена</Link>
+              <Link to={-1}>Назад</Link>
             </Button>
             {onEditMode || (
               <Button

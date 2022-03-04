@@ -3,7 +3,7 @@ import { fetchPatientList } from "redux/actions/createActions";
 
 export const fetchGetPatientList = () => (dispatch) => {
   axios
-    .get("http://localhost:8080/patientList")
+    .get(`${process.env.REACT_APP_URL}/patientList`)
     .then(({ data }) => {
       dispatch(fetchPatientList(data));
     })

@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchPatientById } from "redux/middlewares/fetchPatientById";
 import { titleTablePatient } from "commonsFiles/titleTablePatient";
 import { fetchDeletePatient } from "redux/middlewares/fetchDeletePatient";
+import { on_edit_mode } from "redux/actions/createActions";
 
 const PatientCardPage = () => {
   const dispatch = useDispatch();
@@ -17,11 +18,16 @@ const PatientCardPage = () => {
   useEffect(() => {
     dispatch(fetchPatientById(id));
   }, []);
-
+  const handleOnEditMode = (id) => {
+    dispatch(on_edit_mode());
+    dispatch(fetchPatientById(id));
+    navigate(`/patientEdit${id}`);
+  };
   const handleRemovePatient = (id) => {
     dispatch(fetchDeletePatient(id));
     navigate("/administrator");
   };
+
   const { patientPersonalData } = selectedPatient;
 
   return (
@@ -30,9 +36,7 @@ const PatientCardPage = () => {
         <div className="title-card-patient">
           <i>{patientPersonalData?.personData.lastName}</i>
           <i>{patientPersonalData?.personData.name}</i>
-          <i style={{ width: "200px" }}>
-            {patientPersonalData?.personData.patronymic}
-          </i>
+          <i>{patientPersonalData?.personData.patronymic}</i>
         </div>
       </Typography.Title>
       <div className="card-container">
@@ -43,13 +47,18 @@ const PatientCardPage = () => {
               const rowsCard = Object.entries(el[1]);
               rowsCard.splice(0, 1);
               return (
-                <Col className="columns-card">
+                <Col key={el[1].title} className="columns-card">
                   <Card
+                    key={el[1].title}
                     className="card-patient"
-                    title={<i style={{ color: "white" }}>{el[1].title}</i>}
+                    title={
+                      <i key={el[1].title} style={{ color: "white" }}>
+                        {el[1].title}
+                      </i>
+                    }
                   >
                     {rowsCard.map((elem) => (
-                      <p>
+                      <p key={elem[1]}>
                         {elem[1]}:{" "}
                         {patientPersonalData[el[0]][elem[0]] || "Не указано"}{" "}
                       </p>
@@ -59,15 +68,15 @@ const PatientCardPage = () => {
               );
             })}
           <div className="btns-patient-card">
-            <Button className="btn">Изменить</Button>
+            <Button className="btn" onClick={() => handleOnEditMode(id)}>
+              Изменить
+            </Button>
             <Button className="btn" onClick={() => handleRemovePatient(id)}>
               Удалить
             </Button>{" "}
-            <Link to={"/administrator"}>
-              <Button className="btn" style={{ width: "100px" }}>
-                Назад
-              </Button>
-            </Link>
+            <Button className="btn" style={{ width: "100px" }}>
+              <Link to={-1}>Назад</Link>
+            </Button>
           </div>
         </Row>
       </div>

@@ -1,19 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 
-import {
-  Form,
-  Input,
-  Button,
-  Typography,
-  Select,
-  DatePicker,
-  InputNumber,
-} from "antd";
+import { Form, Input, InputNumber } from "antd";
 import "./FormAddress.css";
 import { useDispatch, useSelector } from "react-redux";
-import { on_edit_mode } from "../../redux/actions/createActions";
-import { fetchPatientById } from "../../redux/middlewares/fetchPatientById";
-import { useParams } from "react-router-dom";
+import { initialValueDefault } from "commonsFiles/initialValueDefault";
 
 const FormAddress = () => {
   const { onEditMode, selectedPatient } = useSelector(
@@ -27,7 +17,11 @@ const FormAddress = () => {
       <Form
         className="form-address"
         name="formAddress"
-        initialValues={selectedPatient.patientPersonalData?.addressData}
+        initialValues={
+          onEditMode
+            ? selectedPatient.patientPersonalData?.addressData
+            : initialValueDefault
+        }
         autoComplete="off"
         layout="horizontal"
       >

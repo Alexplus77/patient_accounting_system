@@ -3,7 +3,7 @@ import { fetch_selected_patient } from "../actions/createActions";
 
 export const fetchDeletePatient = (id) => (dispatch) => {
   axios
-    .delete(`http://localhost:8080/delete${id}`)
+    .delete(`${process.env.REACT_APP_URL}/delete${id}`)
     .then(({ data }) => dispatch(fetch_selected_patient(data)))
     .catch((e) => console.log(e));
 };

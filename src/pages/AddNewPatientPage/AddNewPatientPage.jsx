@@ -18,9 +18,11 @@ const AddNewPatientPage = () => {
 
   const [valueForm, setValueForm] = useState({});
   const clearForms = ({ formAddress, formPassport, formPersonData }) => {
-    formPassport.resetFields();
-    formAddress.resetFields();
-    formPersonData.resetFields();
+    if ((formAddress, formPassport, formPersonData)) {
+      formPassport.resetFields();
+      formAddress.resetFields();
+      formPersonData.resetFields();
+    }
   };
   const navigate = useNavigate();
   return (

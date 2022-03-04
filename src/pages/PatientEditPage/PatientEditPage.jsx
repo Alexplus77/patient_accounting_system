@@ -4,7 +4,7 @@ import { FormPassport } from "components/FormPassport";
 import { FormPersonData } from "components/FormPersonData";
 import { Form } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPostPatient } from "redux/middlewares/fetchPostPatient";
+import { fetchUpdatePatient } from "redux/middlewares/fetchUpdatePatient";
 import { fetchPatientById } from "redux/middlewares/fetchPatientById";
 import { on_edit_mode } from "redux/actions/createActions";
 import "./PatientEditPage.css";
@@ -17,6 +17,7 @@ const PatientEditPage = () => {
     (state) => state.storeReducer
   );
   const [valueForm, setValueForm] = useState({});
+
   useEffect(() => {
     dispatch(fetchPatientById(id));
   }, []);
@@ -39,8 +40,7 @@ const PatientEditPage = () => {
           addressData: formAddress.getFieldsValue(),
           passportData: formPassport.getFieldsValue(),
         };
-
-        dispatch(fetchPostPatient(valueUser));
+        dispatch(fetchUpdatePatient(id, valueUser));
         clearForms({ formAddress, formPassport, formPersonData });
         navigate("/administrator");
       }}
