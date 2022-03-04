@@ -1,4 +1,6 @@
 .main-page-container{
+    position: relative;
     display: grid;
-   margin-bottom: 400px;
+    align-items: center;
+   align-self: center;
 }

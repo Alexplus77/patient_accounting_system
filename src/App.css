@@ -8,6 +8,7 @@ body{
   right: 0;
 }
 .app-container{
+  position: relative;
   background-image: url('images/abstract-5719221_1920.jpg');
   background-repeat: no-repeat;
   height: 100%;
