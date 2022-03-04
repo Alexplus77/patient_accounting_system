@@ -19,9 +19,9 @@ const schemaPatient = mongoose.Schema({
       city: String,
       street: String,
       numberHouse: Number,
-      documentType: String,
     },
     passportData: {
+      documentType: String,
       seriesDocument: String,
       numberDoc: String,
       issuedByWhom: String,

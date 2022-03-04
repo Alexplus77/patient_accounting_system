@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import {
   Form,
@@ -9,17 +9,21 @@ import {
   DatePicker,
   InputNumber,
 } from "antd";
+import { format, add, parse, addDays } from "date-fns";
+import moment from "moment";
 import "./FormPassport.css";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useForm } from "antd/es/form/Form";
 
-const FormPassport = ({ formsValue, clearForm }) => {
-  const onFinish = (values) => {
-    console.log("Success:", values);
-  };
+const FormPassport = ({ clearForms, valueForm }) => {
+  const { onEditMode, selectedPatient } = useSelector(
+    (state) => state.storeReducer
+  );
 
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
+  const dateOfIssue =
+    selectedPatient.patientPersonalData?.passportData.dateOfIssue;
+
   return (
     <div className="container-formPassport">
       <div className="background-form" />
@@ -27,9 +31,10 @@ const FormPassport = ({ formsValue, clearForm }) => {
       <Form
         className="form-passport"
         name="formPassport"
-        initialValues={{ remember: true }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
+        initialValues={{
+          ...selectedPatient.patientPersonalData?.passportData,
+          dateOfIssue: moment(dateOfIssue),
+        }}
         autoComplete="off"
         layout="horizontal"
       >
@@ -69,15 +74,17 @@ const FormPassport = ({ formsValue, clearForm }) => {
             <Button className={"btn"}>
               <Link to={"/administrator"}>Отмена</Link>
             </Button>
-            <Button
-              onClick={() => clearForm(formsValue)}
-              className="btn"
-              htmlType={"button"}
-            >
-              Очистить форму
-            </Button>
+            {onEditMode || (
+              <Button
+                onClick={() => clearForms(valueForm)}
+                className="btn"
+                htmlType={"button"}
+              >
+                Очистить форму
+              </Button>
+            )}
             <Button className="btn" htmlType={"submit"}>
-              Отправить
+              {onEditMode ? "Сохранить изменения" : "Отправить"}
             </Button>
           </div>
         </Form.Item>

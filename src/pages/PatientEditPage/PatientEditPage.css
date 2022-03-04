@@ -1,0 +1,8 @@
+.container-forms-addPatient{
+    display: grid;
+    margin-left: 50px;
+    grid-template-columns: repeat(3, 400px);
+    grid-template-rows: 500px auto;
+    gap: 20px;
+
+}

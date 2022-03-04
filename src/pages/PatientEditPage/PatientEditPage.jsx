@@ -1,16 +1,26 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FormAddress } from "components/FormAddress";
 import { FormPassport } from "components/FormPassport";
 import { FormPersonData } from "components/FormPersonData";
 import { Form } from "antd";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchPostPatient } from "redux/middlewares/fetchPostPatient";
-import "./FormAddPatient.css";
-import { useNavigate } from "react-router-dom";
+import { fetchPatientById } from "redux/middlewares/fetchPatientById";
+import { on_edit_mode } from "redux/actions/createActions";
+import "./PatientEditPage.css";
+import { useNavigate, useParams } from "react-router-dom";
 
-const FormAddPatient = () => {
+const PatientEditPage = () => {
+  const { id } = useParams();
   const dispatch = useDispatch();
-  const [formsValue, setForms] = useState({});
+  const { onEditMode, selectedPatient } = useSelector(
+    (state) => state.storeReducer
+  );
+  const [valueForm, setValueForm] = useState({});
+  useEffect(() => {
+    dispatch(fetchPatientById(id));
+  }, []);
+
   const clearForms = ({ formAddress, formPassport, formPersonData }) => {
     formPassport.resetFields();
     formAddress.resetFields();
@@ -19,9 +29,9 @@ const FormAddPatient = () => {
   const navigate = useNavigate();
   return (
     <Form.Provider
-      onFormChange={(name, { forms }) => {
-        setForms({ ...formsValue, ...forms });
-      }}
+      onFormChange={(name, { forms }) =>
+        setValueForm({ ...valueForm, ...forms })
+      }
       onFormFinish={(name, { values, forms }) => {
         const { formAddress, formPassport, formPersonData } = forms;
         const valueUser = {
@@ -29,25 +39,21 @@ const FormAddPatient = () => {
           addressData: formAddress.getFieldsValue(),
           passportData: formPassport.getFieldsValue(),
         };
+
         dispatch(fetchPostPatient(valueUser));
         clearForms({ formAddress, formPassport, formPersonData });
         navigate("/administrator");
-        //console.log(valueUser);
-
-        // if (name === "userForm") {
-
-        // const users = basicForm.getFieldValue("users") || [];
-        // basicForm.setFieldsValue({ users: [...users, values] });
-        // setVisible(false);
-        // }
       }}
     >
-      <div className="container-forms-addPatient">
-        <FormPersonData />
-        <FormAddress />
-        <FormPassport formsValue={formsValue} clearForm={clearForms} />
-      </div>
+      {selectedPatient.patientPersonalData && (
+        <div className="container-forms-addPatient">
+          <FormPersonData />
+          <FormAddress />
+          <FormPassport />
+        </div>
+      )}
     </Form.Provider>
   );
 };
-export { FormAddPatient };
+
+export { PatientEditPage };

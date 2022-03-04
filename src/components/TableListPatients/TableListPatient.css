@@ -2,8 +2,7 @@
     display: grid;
     justify-items: center;
     width: 1300px;
-margin-left: 20px;
-    margin-bottom: 500px;
+
 }
 .title-table{
     color: white;
@@ -22,4 +21,16 @@ margin-left: 20px;
 .icon:hover{
     font-size: 22px;
     color: blue;
+}
+.rowTable-list{
+    background-color: #161616;
+    color: white;
+    opacity: 80%;
+}
+.rowTable-list:hover{
+    color: black;
+}
+.row-cell{
+    background-color: #161616;
+    color: white;
 }

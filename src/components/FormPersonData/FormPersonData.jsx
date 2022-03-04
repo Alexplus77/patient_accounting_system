@@ -1,15 +1,16 @@
 import { Button, DatePicker, Form, Input, InputNumber, Select } from "antd";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import "./FormPersonData.css";
+import { useSelector } from "react-redux";
+import { useForm } from "antd/es/form/Form";
+import moment from "moment";
 
 const FormPersonData = () => {
-  const onFinish = (values) => {
-    console.log("Success:", values);
-  };
-
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
+  const { onEditMode, selectedPatient } = useSelector(
+    (state) => state.storeReducer
+  );
+  const dateOfBirth =
+    selectedPatient.patientPersonalData?.personData.dateOfBirth;
   return (
     <div className="container-form-addPatient">
       <div className="background-form" />
@@ -17,9 +18,10 @@ const FormPersonData = () => {
       <Form
         className="form-enter-user"
         name="formPersonData"
-        initialValues={{ remember: true, phone: "+" + 7 }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
+        initialValues={{
+          ...selectedPatient.patientPersonalData?.personData,
+          dateOfBirth: moment(dateOfBirth),
+        }}
         autoComplete="off"
         layout="horizontal"
       >

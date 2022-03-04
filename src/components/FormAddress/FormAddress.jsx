@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import {
   Form,
@@ -10,15 +10,16 @@ import {
   InputNumber,
 } from "antd";
 import "./FormAddress.css";
+import { useDispatch, useSelector } from "react-redux";
+import { on_edit_mode } from "../../redux/actions/createActions";
+import { fetchPatientById } from "../../redux/middlewares/fetchPatientById";
+import { useParams } from "react-router-dom";
 
 const FormAddress = () => {
-  const onFinish = (values) => {
-    console.log("Success:", values);
-  };
+  const { onEditMode, selectedPatient } = useSelector(
+    (state) => state.storeReducer
+  );
 
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
   return (
     <div className="container-formAddress">
       <div className="background-form" />
@@ -26,9 +27,7 @@ const FormAddress = () => {
       <Form
         className="form-address"
         name="formAddress"
-        initialValues={{ remember: true }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
+        initialValues={selectedPatient.patientPersonalData?.addressData}
         autoComplete="off"
         layout="horizontal"
       >

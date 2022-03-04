@@ -1,1 +1,0 @@
-export { FormAddPatient } from "./FormAddPatient";

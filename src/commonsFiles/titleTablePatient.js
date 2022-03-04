@@ -21,7 +21,6 @@ export const titleTablePatient = {
   },
   passportData: {
     title: "Паспортные данные",
-
     documentType: "Тип документа",
     seriesDocument: "Серия",
     numberDoc: "Номер",

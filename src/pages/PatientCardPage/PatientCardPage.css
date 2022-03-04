@@ -1,7 +1,8 @@
 .card-page-container{
     display: grid;
-    width: 100%;
-
+justify-self: center;
+    align-self: center;
+    margin-top: 20px;
 }
 .title-card-patient{
     display: grid;
@@ -19,24 +20,19 @@ gap: 10px;
 }
 .background-card{
     position: absolute;
-  height: 93%;
+  height: 100%;
     width: 89%;
     background-color: #161616;
 opacity: 60%;
 }
 .rowCard{
-
     display: grid;
     grid-auto-flow: column;
     gap: 10px;
     justify-self: center;
     height: 100%;
 }
-/*.columns-card{*/
-/*   background: #161616;*/
 
-/*    height: 380px;*/
-/*}*/
 .btns-patient-card{
     display: grid;
 height: 120px;

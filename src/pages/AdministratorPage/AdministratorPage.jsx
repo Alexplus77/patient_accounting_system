@@ -1,5 +1,5 @@
 import React from "react";
-import { FormAddPatient } from "components/FormAddPatient";
+import { AddNewPatientPage } from "pages/AddNewPatientPage";
 import { TableListPatients } from "components/TableListPatients";
 import { useSelector, useDispatch } from "react-redux";
 import { Button } from "antd";

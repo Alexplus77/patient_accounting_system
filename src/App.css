@@ -5,4 +5,10 @@ body{
   top: 0;
   left: 0;
   bottom: 0;
+  right: 0;
+}
+.app-container{
+  background-image: url('images/abstract-5719221_1920.jpg');
+  background-repeat: no-repeat;
+  height: 100%;
 }
