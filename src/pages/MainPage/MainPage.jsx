@@ -1,5 +1,5 @@
 import React from "react";
-import { EnterUserForm } from "components/EnterUserForm/EnterUserForm";
+import { EnterUserForm } from "components/Forms/EnterUserForm/EnterUserForm";
 
 import "./MainPage.css";
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import { FormAddress } from "components/FormAddress";
-import { FormPassport } from "components/FormPassport";
-import { FormPersonData } from "components/FormPersonData";
+import { FormAddress } from "components/Forms/FormAddress";
+import { FormPassport } from "components/Forms/FormPassport";
+import { FormPersonData } from "components/Forms/FormPersonData";
 import { Form } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPostPatient } from "redux/middlewares/fetchPostPatient";
