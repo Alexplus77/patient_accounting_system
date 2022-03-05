@@ -1,16 +1,18 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FormAddress } from "components/Forms/FormAddress";
 import { FormPassport } from "components/Forms/FormPassport";
 import { FormPersonData } from "components/Forms/FormPersonData";
 import { Form } from "antd";
+import { validateFormsAddPatient } from "commonsFiles/validateFormsAddPatient";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPostPatient } from "redux/middlewares/fetchPostPatient";
 import "./AddNewPatientPage.css";
 import { useNavigate } from "react-router-dom";
 import { exit_edit_mode } from "redux/actions/createActions";
+import { save_error } from "redux/actions/createActions";
 
 const AddNewPatientPage = () => {
-  const { onEditMode } = useSelector((state) => state.storeReducer);
+  const { onEditMode, errors } = useSelector((state) => state.storeReducer);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(exit_edit_mode());
@@ -24,12 +26,13 @@ const AddNewPatientPage = () => {
       formPersonData.resetFields();
     }
   };
+
   const navigate = useNavigate();
   return (
     <Form.Provider
-      onFormChange={(name, { forms }) =>
-        setValueForm({ ...valueForm, ...forms })
-      }
+      onFormChange={(name, { forms }) => {
+        setValueForm({ ...valueForm, ...forms });
+      }}
       onFormFinish={(name, { values, forms }) => {
         const { formAddress, formPassport, formPersonData } = forms;
         const valueUser = {
@@ -37,9 +40,18 @@ const AddNewPatientPage = () => {
           addressData: formAddress.getFieldsValue(),
           passportData: formPassport.getFieldsValue(),
         };
-        dispatch(fetchPostPatient(valueUser));
-        clearForms({ formAddress, formPassport, formPersonData });
-        navigate("/administrator");
+        if (validateFormsAddPatient(forms)) {
+          dispatch(
+            save_error({
+              error:
+                "Не все поля со звездочкой заполнены или заполнены с ошибкой",
+            })
+          );
+        } else {
+          dispatch(fetchPostPatient(valueUser));
+          clearForms({ formAddress, formPassport, formPersonData });
+          navigate("/administrator");
+        }
       }}
     >
       {onEditMode || (

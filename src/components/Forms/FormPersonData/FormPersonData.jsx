@@ -6,10 +6,17 @@ import { initialValueDefault } from "commonsFiles/initialValueDefault";
 import moment from "moment";
 
 const FormPersonData = () => {
-  const { onEditMode, selectedPatient } = useSelector(
+  const { onEditMode, selectedPatient, errors } = useSelector(
     (state) => state.storeReducer
   );
+  console.log(errors);
+  const onFinish = (values) => {
+    console.log("Success:", values);
+  };
 
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+  };
   const dateOfBirth =
     selectedPatient.patientPersonalData?.personData.dateOfBirth;
 
@@ -18,6 +25,8 @@ const FormPersonData = () => {
       <div className="background-form" />
       <h2 className="title">Личные данные</h2>
       <Form
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
         className="form-enter-user"
         name="formPersonData"
         initialValues={
@@ -41,7 +50,21 @@ const FormPersonData = () => {
         <Form.Item
           label={<label>Имя</label>}
           name={"name"}
-          rules={[{ required: true, message: "Не указали фамилию" }]}
+          rules={[
+            {
+              required: true,
+              message: "Не указали имя",
+            },
+            { whitespace: true },
+            // {
+            //   validator: (_, value) => {
+            //     if (value.includes(" ")) {
+            //       return Promise.reject("Error");
+            //     }
+            //     return Promise.resolve();
+            //   },
+            // },
+          ]}
         >
           <Input placeholder="Введите имя" />
         </Form.Item>

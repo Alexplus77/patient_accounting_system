@@ -4,6 +4,7 @@ import {
   FETCH_SELECTED_PATIENT,
   ON_EDIT_MODE,
   EXIT_EDIT_MODE,
+  SAVE_ERROR,
 } from "./actionsTypes";
 
 export const fetchPatientList = (data) => ({
@@ -25,4 +26,8 @@ export const on_edit_mode = () => ({
 });
 export const exit_edit_mode = () => ({
   type: EXIT_EDIT_MODE,
+});
+export const save_error = (error) => ({
+  type: SAVE_ERROR,
+  payload: error,
 });
