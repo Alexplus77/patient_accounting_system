@@ -9,8 +9,10 @@ const FormPersonData = () => {
   const { onEditMode, selectedPatient } = useSelector(
     (state) => state.storeReducer
   );
+
   const dateOfBirth =
     selectedPatient.patientPersonalData?.personData.dateOfBirth;
+
   return (
     <div className="container-form-addPatient">
       <div className="background-form" />
@@ -18,10 +20,14 @@ const FormPersonData = () => {
       <Form
         className="form-enter-user"
         name="formPersonData"
-        initialValues={{
-          ...selectedPatient.patientPersonalData?.personData,
-          dateOfBirth: moment(dateOfBirth),
-        }}
+        initialValues={
+          onEditMode
+            ? {
+                ...selectedPatient.patientPersonalData?.personData,
+                dateOfBirth: moment(dateOfBirth),
+              }
+            : { remember: true }
+        }
         autoComplete="off"
         layout="horizontal"
       >

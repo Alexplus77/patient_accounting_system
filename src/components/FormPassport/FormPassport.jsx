@@ -31,10 +31,14 @@ const FormPassport = ({ clearForms, valueForm }) => {
       <Form
         className="form-passport"
         name="formPassport"
-        initialValues={{
-          ...selectedPatient.patientPersonalData?.passportData,
-          dateOfIssue: moment(dateOfIssue),
-        }}
+        initialValues={
+          onEditMode
+            ? {
+                ...selectedPatient.patientPersonalData?.passportData,
+                dateOfIssue: moment(dateOfIssue),
+              }
+            : { remember: true }
+        }
         autoComplete="off"
         layout="horizontal"
       >

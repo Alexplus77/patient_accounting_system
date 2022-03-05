@@ -7,6 +7,7 @@ import { fetchPatientById } from "redux/middlewares/fetchPatientById";
 import { titleTablePatient } from "commonsFiles/titleTablePatient";
 import { fetchDeletePatient } from "redux/middlewares/fetchDeletePatient";
 import { on_edit_mode } from "redux/actions/createActions";
+import moment from "moment";
 
 const PatientCardPage = () => {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ const PatientCardPage = () => {
   useEffect(() => {
     dispatch(fetchPatientById(id));
   }, []);
+
   const handleOnEditMode = (id) => {
     dispatch(on_edit_mode());
     dispatch(fetchPatientById(id));
