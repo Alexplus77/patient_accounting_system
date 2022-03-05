@@ -14,6 +14,8 @@ import { save_error } from "redux/actions/createActions";
 const AddNewPatientPage = () => {
   const { onEditMode, errors } = useSelector((state) => state.storeReducer);
   const dispatch = useDispatch();
+  const errorMassage =
+    "Не все поля со звездочкой заполнены или заполнены с ошибкой";
   useEffect(() => {
     dispatch(exit_edit_mode());
   }, []);
@@ -43,8 +45,7 @@ const AddNewPatientPage = () => {
         if (validateFormsAddPatient(forms)) {
           dispatch(
             save_error({
-              error:
-                "Не все поля со звездочкой заполнены или заполнены с ошибкой",
+              error: errorMassage,
             })
           );
         } else {

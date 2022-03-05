@@ -9,6 +9,18 @@ const FormAddress = () => {
   const { onEditMode, selectedPatient } = useSelector(
     (state) => state.storeReducer
   );
+  const rulesForm = [
+    { required: true },
+    { whitespace: true },
+    {
+      validator: (_, value) => {
+        if (value.includes(" ")) {
+          return Promise.reject("Поле не может содержать пробел");
+        }
+        return Promise.resolve();
+      },
+    },
+  ];
 
   return (
     <div className="container-formAddress">
@@ -34,11 +46,7 @@ const FormAddress = () => {
         <Form.Item label={<label>Область</label>} name={"region"}>
           <Input placeholder="Область" />
         </Form.Item>
-        <Form.Item
-          label={<label>Город</label>}
-          name="city"
-          rules={[{ required: true, message: "Не указали город проживания" }]}
-        >
+        <Form.Item label={<label>Город</label>} name="city" rules={rulesForm}>
           <Input placeholder="Город" />
         </Form.Item>
         <Form.Item label={<label>Улица</label>} name={"street"}>

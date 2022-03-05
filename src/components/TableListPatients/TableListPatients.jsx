@@ -24,7 +24,7 @@ const TableListPatients = () => {
         <Table
           style={{ width: "1100px" }}
           rowClassName="rowTable-list"
-          pagination={{ defaultPageSize: 6 }}
+          pagination={{ defaultPageSize: 5 }}
           dataSource={patientList.map((el) => {
             return { ...el.patientPersonalData, id: el._id };
           })}

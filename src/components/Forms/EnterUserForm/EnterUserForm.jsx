@@ -11,6 +11,18 @@ const EnterUserForm = () => {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+  const rulesForm = [
+    { required: true },
+    { whitespace: true },
+    {
+      validator: (_, value) => {
+        if (value.includes(" ")) {
+          return Promise.reject("Поле не может содержать пробел");
+        }
+        return Promise.resolve();
+      },
+    },
+  ];
   return (
     <div className="container-form">
       <div className="background" />
@@ -23,10 +35,14 @@ const EnterUserForm = () => {
         autoComplete="off"
         layout="horizontal"
       >
-        <Form.Item label={<label>Логин</label>} name={"name"}>
+        <Form.Item rules={rulesForm} label={<label>Логин</label>} name={"name"}>
           <Input placeholder="Введите логин" />
         </Form.Item>
-        <Form.Item label={<label>Выберите роль</label>} name="select-role">
+        <Form.Item
+          rules={[{ required: true }]}
+          label={<label>Выберите роль</label>}
+          name="select-role"
+        >
           <Select placeholder="Выберите роль">
             <Select.Option value="superAdmin">
               Супер Администратор
@@ -35,7 +51,22 @@ const EnterUserForm = () => {
             <Select.Option value="doctor">Врач</Select.Option>
           </Select>
         </Form.Item>
-        <Form.Item label={<label>Пароль</label>} name={"password"}>
+        <Form.Item
+          rules={[
+            { required: true },
+            {
+              validator: (_, value) => {
+                if (value.includes(" ")) {
+                  return Promise.reject("Поле не может содержать пробел");
+                }
+                return Promise.resolve();
+              },
+            },
+            { min: 6 },
+          ]}
+          label={<label>Пароль</label>}
+          name={"password"}
+        >
           <Input.Password placeholder="Введите пароль" />
         </Form.Item>
         <Form.Item>

@@ -2,31 +2,32 @@ import { Button, DatePicker, Form, Input, InputNumber, Select } from "antd";
 import React, { useEffect, useRef } from "react";
 import "./FormPersonData.css";
 import { useSelector } from "react-redux";
-import { initialValueDefault } from "commonsFiles/initialValueDefault";
 import moment from "moment";
 
 const FormPersonData = () => {
   const { onEditMode, selectedPatient, errors } = useSelector(
     (state) => state.storeReducer
   );
-  console.log(errors);
-  const onFinish = (values) => {
-    console.log("Success:", values);
-  };
-
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
   const dateOfBirth =
     selectedPatient.patientPersonalData?.personData.dateOfBirth;
 
+  const rulesForm = [
+    { required: true },
+    { whitespace: true },
+    {
+      validator: (_, value) => {
+        if (value.includes(" ")) {
+          return Promise.reject("Поле не может содержать пробел");
+        }
+        return Promise.resolve();
+      },
+    },
+  ];
   return (
     <div className="container-form-addPatient">
       <div className="background-form" />
       <h2 className="title">Личные данные</h2>
       <Form
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
         className="form-enter-user"
         name="formPersonData"
         initialValues={
@@ -41,31 +42,13 @@ const FormPersonData = () => {
         layout="horizontal"
       >
         <Form.Item
-          rules={[{ required: true, message: "Не указали фамилию" }]}
+          rules={rulesForm}
           label={<label>Фамилия</label>}
           name={"lastName"}
         >
           <Input placeholder="Введите фамилию" />
         </Form.Item>
-        <Form.Item
-          label={<label>Имя</label>}
-          name={"name"}
-          rules={[
-            {
-              required: true,
-              message: "Не указали имя",
-            },
-            { whitespace: true },
-            // {
-            //   validator: (_, value) => {
-            //     if (value.includes(" ")) {
-            //       return Promise.reject("Error");
-            //     }
-            //     return Promise.resolve();
-            //   },
-            // },
-          ]}
-        >
+        <Form.Item label={<label>Имя</label>} name={"name"} rules={rulesForm}>
           <Input placeholder="Введите имя" />
         </Form.Item>
         <Form.Item label={<label>Отчество</label>} name={"patronymic"}>
