@@ -4,10 +4,13 @@ import React from "react";
 import { fetchDeletePatient } from "redux/middlewares/fetchDeletePatient";
 import { fetchPatientById } from "redux/middlewares/fetchPatientById";
 import { on_edit_mode } from "redux/actions/createActions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { format, parse } from "date-fns";
+import { Button, Input } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
 
 export const useColumnsTableListPatients = () => {
+  const { selectedPatient } = useSelector((state) => state.storeReducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleRemovePatient = (id) => {
@@ -28,6 +31,38 @@ export const useColumnsTableListPatients = () => {
           render: (text, { personData }) => (
             <Link to={`/patientCard${text.id}`}>{personData.lastName}</Link>
           ),
+          filterDropdown: ({
+            setSelectedKeys,
+            selectedKeys,
+            confirm,
+            clearFilters,
+          }) => {
+            return (
+              <>
+                <Input
+                  autoFocus
+                  onChange={(e) => {
+                    setSelectedKeys(e.target.value ? [e.target.value] : []);
+                    confirm();
+                  }}
+                  value={selectedKeys[0]}
+                  onPressEnter={() => {
+                    confirm();
+                  }}
+                  placeholder={"Поиск"}
+                />
+                <Button onClick={() => clearFilters()}>Clear</Button>
+              </>
+            );
+          },
+          filterIcon: () => {
+            return <SearchOutlined style={{ fontSize: "20px" }} />;
+          },
+          onFilter: (value, record) => {
+            return [...record.personData.lastName.toLowerCase()]
+              .slice(0, value.length)
+              .includes(value.toLowerCase());
+          },
         },
         {
           title: "Имя",

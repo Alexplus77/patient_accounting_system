@@ -46,7 +46,7 @@ const FormPersonData = () => {
           label={<label>Фамилия</label>}
           name={"lastName"}
         >
-          <Input placeholder="Введите фамилию" />
+          <Input autoFocus placeholder="Введите фамилию" />
         </Form.Item>
         <Form.Item label={<label>Имя</label>} name={"name"} rules={rulesForm}>
           <Input placeholder="Введите имя" />
