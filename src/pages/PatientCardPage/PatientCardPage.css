@@ -20,7 +20,7 @@ gap: 10px;
 .background-card{
     position: absolute;
   height: 100%;
-    width: 89%;
+    width: 670px;
     background-color: #161616;
 opacity: 60%;
 }
