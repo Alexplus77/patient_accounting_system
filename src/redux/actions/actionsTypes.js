@@ -4,3 +4,4 @@ export const FETCH_SELECTED_PATIENT = "FETCH_SELECTED_PATIENT";
 export const ON_EDIT_MODE = "ON_EDIT_MODE";
 export const EXIT_EDIT_MODE = "EXIT_EDIT_MODE";
 export const SAVE_ERROR = "SAVE_ERROR";
+export const IS_LOADING = "IS_LOADING";

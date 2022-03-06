@@ -7,7 +7,7 @@ import "./TableListPatient.css";
 
 const TableListPatients = () => {
   const dispatch = useDispatch();
-  const { patientList, selectedPatient } = useSelector(
+  const { patientList, selectedPatient, loading } = useSelector(
     (state) => state.storeReducer
   );
 
@@ -22,6 +22,7 @@ const TableListPatients = () => {
           <i className="title-table">Список пациентов</i>
         </Typography.Title>
         <Table
+          loading={loading}
           style={{ width: "1100px" }}
           rowClassName="rowTable-list"
           pagination={{ defaultPageSize: 5 }}

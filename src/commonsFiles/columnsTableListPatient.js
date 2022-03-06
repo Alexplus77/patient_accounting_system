@@ -5,6 +5,7 @@ import { fetchDeletePatient } from "redux/middlewares/fetchDeletePatient";
 import { fetchPatientById } from "redux/middlewares/fetchPatientById";
 import { on_edit_mode } from "redux/actions/createActions";
 import { useDispatch } from "react-redux";
+import { format, parse } from "date-fns";
 
 export const useColumnsTableListPatients = () => {
   const dispatch = useDispatch();
@@ -40,9 +41,14 @@ export const useColumnsTableListPatients = () => {
         },
         {
           title: "Год рождения",
-          render: (text, { personData }) => (
-            <i>{personData.dateOfBirth || "Не указано"}</i>
-          ),
+          render: (text, { personData }) => {
+            return (
+              <i>
+                {format(new Date(personData.dateOfBirth), "dd.MM.yyyy") ||
+                  "Не указано"}
+              </i>
+            );
+          },
         },
       ],
     },

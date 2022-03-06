@@ -7,13 +7,15 @@ import { fetchPatientById } from "redux/middlewares/fetchPatientById";
 import { titleTablePatient } from "commonsFiles/titleTablePatient";
 import { fetchDeletePatient } from "redux/middlewares/fetchDeletePatient";
 import { on_edit_mode } from "redux/actions/createActions";
-import moment from "moment";
+import { format } from "date-fns";
 
 const PatientCardPage = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const navigate = useNavigate();
-  const { selectedPatient } = useSelector((state) => state.storeReducer);
+  const { selectedPatient, loading } = useSelector(
+    (state) => state.storeReducer
+  );
   const id = params.id;
 
   useEffect(() => {
@@ -51,6 +53,7 @@ const PatientCardPage = () => {
               return (
                 <Col key={el[1].title} className="columns-card">
                   <Card
+                    loading={loading}
                     key={el[1].title}
                     className="card-patient"
                     title={
@@ -59,12 +62,28 @@ const PatientCardPage = () => {
                       </i>
                     }
                   >
-                    {rowsCard.map((elem) => (
-                      <p key={elem[1]}>
-                        {elem[1]}:{" "}
-                        {patientPersonalData[el[0]][elem[0]] || "Не указано"}{" "}
-                      </p>
-                    ))}
+                    {rowsCard.map((elem) => {
+                      if (
+                        elem[0] === "dateOfBirth" ||
+                        elem[0] === "dateOfIssue"
+                      ) {
+                        return (
+                          <p key={elem[1]}>
+                            {elem[1]}:{" "}
+                            {format(
+                              new Date(patientPersonalData[el[0]][elem[0]]),
+                              "dd.MM.yyyy"
+                            ) || "Не указано"}{" "}
+                          </p>
+                        );
+                      }
+                      return (
+                        <p key={elem[1]}>
+                          {elem[1]}:{" "}
+                          {patientPersonalData[el[0]][elem[0]] || "Не указано"}{" "}
+                        </p>
+                      );
+                    })}
                   </Card>
                 </Col>
               );

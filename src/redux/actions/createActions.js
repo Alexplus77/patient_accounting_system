@@ -5,7 +5,12 @@ import {
   ON_EDIT_MODE,
   EXIT_EDIT_MODE,
   SAVE_ERROR,
+  IS_LOADING,
 } from "./actionsTypes";
+
+export const is_loading = () => ({
+  type: IS_LOADING,
+});
 
 export const fetchPatientList = (data) => ({
   type: FETCH_GET_PATIENTS_LIST,
