@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FormAddress } from "components/Forms/FormAddress";
 import { FormPassport } from "components/Forms/FormPassport";
 import { FormPersonData } from "components/Forms/FormPersonData";
-import { Form } from "antd";
+import { Form, Modal } from "antd";
 import { validateFormsAddPatient } from "commonsFiles/validateFormsAddPatient";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPostPatient } from "redux/middlewares/fetchPostPatient";
@@ -43,11 +43,10 @@ const AddNewPatientPage = () => {
           passportData: formPassport.getFieldsValue(),
         };
         if (validateFormsAddPatient(forms)) {
-          dispatch(
-            save_error({
-              error: errorMassage,
-            })
-          );
+          Modal.error({
+            title: "Ошибка",
+            content: errorMassage,
+          });
         } else {
           dispatch(fetchPostPatient(valueUser));
           clearForms({ formAddress, formPassport, formPersonData });

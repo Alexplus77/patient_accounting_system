@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { format, parse } from "date-fns";
 import { Button, Input } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
+import "components/TableListPatients/TableListPatient.css";
 
 export const useColumnsTableListPatients = () => {
   const { selectedPatient } = useSelector((state) => state.storeReducer);
@@ -21,6 +22,35 @@ export const useColumnsTableListPatients = () => {
     dispatch(on_edit_mode());
     dispatch(fetchPatientById(id));
     navigate(`/patientEdit${id}`);
+  };
+  const onFilterDropDown = ({
+    setSelectedKeys,
+    selectedKeys,
+    confirm,
+    clearFilters,
+  }) => {
+    return (
+      <div className={"btns-search"}>
+        <Input
+          autoFocus
+          onChange={(e) => {
+            setSelectedKeys(e.target.value.trim() ? [e.target.value] : []);
+            confirm({ closeDropdown: false });
+          }}
+          value={selectedKeys[0]}
+          onPressEnter={() => {
+            confirm();
+          }}
+          onBlur={() => {
+            confirm();
+          }}
+          placeholder={"Поиск"}
+        />
+        <Button danger onClick={() => clearFilters()}>
+          Clear
+        </Button>
+      </div>
+    );
   };
   return [
     {
@@ -36,37 +66,48 @@ export const useColumnsTableListPatients = () => {
             selectedKeys,
             confirm,
             clearFilters,
-          }) => {
-            return (
-              <>
-                <Input
-                  autoFocus
-                  onChange={(e) => {
-                    setSelectedKeys(e.target.value ? [e.target.value] : []);
-                    confirm();
-                  }}
-                  value={selectedKeys[0]}
-                  onPressEnter={() => {
-                    confirm();
-                  }}
-                  placeholder={"Поиск"}
-                />
-                <Button onClick={() => clearFilters()}>Clear</Button>
-              </>
-            );
-          },
+          }) =>
+            onFilterDropDown({
+              setSelectedKeys,
+              selectedKeys,
+              confirm,
+              clearFilters,
+            }),
           filterIcon: () => {
             return <SearchOutlined style={{ fontSize: "20px" }} />;
           },
           onFilter: (value, record) => {
-            return [...record.personData.lastName.toLowerCase()]
-              .slice(0, value.length)
-              .includes(value.toLowerCase());
+            return (
+              value &&
+              [...record.personData.lastName.toLowerCase()]
+                .slice(0, value.length)
+                .includes(value.toLowerCase())
+            );
           },
         },
         {
           title: "Имя",
           render: (text, { personData }) => <i>{personData.name}</i>,
+          filterDropdown: ({
+            setSelectedKeys,
+            selectedKeys,
+            confirm,
+            clearFilters,
+          }) =>
+            onFilterDropDown({
+              setSelectedKeys,
+              selectedKeys,
+              confirm,
+              clearFilters,
+            }),
+          filterIcon: () => {
+            return <SearchOutlined style={{ fontSize: "20px" }} />;
+          },
+          onFilter: (value, record) => {
+            return [...record.personData.name.toLowerCase()]
+              .slice(0, value.length)
+              .includes(value.toLowerCase());
+          },
         },
         {
           title: "Отчество",
@@ -95,6 +136,26 @@ export const useColumnsTableListPatients = () => {
           render: (text, { addressData }) => (
             <i>{addressData.city || "Не указано"}</i>
           ),
+          filterDropdown: ({
+            setSelectedKeys,
+            selectedKeys,
+            confirm,
+            clearFilters,
+          }) =>
+            onFilterDropDown({
+              setSelectedKeys,
+              selectedKeys,
+              confirm,
+              clearFilters,
+            }),
+          filterIcon: () => {
+            return <SearchOutlined style={{ fontSize: "20px" }} />;
+          },
+          onFilter: (value, record) => {
+            return [...record.addressData.city.toLowerCase()]
+              .slice(0, value.length)
+              .includes(value.toLowerCase());
+          },
         },
         {
           title: "Улица",

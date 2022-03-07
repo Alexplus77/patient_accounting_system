@@ -1,6 +1,10 @@
 import axios from "axios";
-import { fetch_selected_patient } from "redux/actions/createActions";
+import {
+  fetch_selected_patient,
+  save_error,
+} from "redux/actions/createActions";
 import { is_loading } from "redux/actions/createActions";
+import { Modal } from "antd";
 
 export const fetchPatientById = (id) => (dispatch) => {
   dispatch(is_loading());
@@ -9,5 +13,10 @@ export const fetchPatientById = (id) => (dispatch) => {
     .then(({ data }) => {
       dispatch(fetch_selected_patient(data));
     })
-    .catch((e) => console.log(e));
+    .catch((e) =>
+      Modal.error({
+        title: "Ошибка",
+        content: e.message,
+      })
+    );
 };

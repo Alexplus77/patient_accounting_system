@@ -1,6 +1,7 @@
 import axios from "axios";
-import { exit_edit_mode } from "redux/actions/createActions";
+import { exit_edit_mode, save_error } from "redux/actions/createActions";
 import { is_loading } from "redux/actions/createActions";
+import { Modal } from "antd";
 
 export const fetchUpdatePatient = (id, newData) => (dispatch) => {
   dispatch(is_loading());
@@ -9,5 +10,10 @@ export const fetchUpdatePatient = (id, newData) => (dispatch) => {
     .then(({ data }) => {
       dispatch(exit_edit_mode());
     })
-    .catch((e) => console.log(e));
+    .catch((e) =>
+      Modal.error({
+        title: "Ошибка",
+        content: e.message,
+      })
+    );
 };

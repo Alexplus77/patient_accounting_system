@@ -35,3 +35,7 @@ align-self: center;
     background-color: #161616;
     color: white;
 }
+.btns-search{
+    display: grid;
+    grid-auto-flow: column;
+}
