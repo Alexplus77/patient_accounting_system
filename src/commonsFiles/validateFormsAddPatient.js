@@ -4,7 +4,12 @@ export const validateFormsAddPatient = (forms) => {
   });
   const { formAddress, formPersonData } = forms;
   const requiredFieldsPersonalData = Object.values(
-    formPersonData.getFieldsValue(["name", "lastName", "dateOfBirth"])
+    formPersonData.getFieldsValue([
+      "name",
+      "lastName",
+      "dateOfBirth",
+      "phoneNumber",
+    ])
   );
   const requiredFieldsAddress = Object.values(
     formAddress.getFieldsValue(["city"])

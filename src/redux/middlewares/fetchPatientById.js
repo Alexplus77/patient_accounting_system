@@ -4,7 +4,7 @@ import {
   save_error,
 } from "redux/actions/createActions";
 import { is_loading } from "redux/actions/createActions";
-import { Modal } from "antd";
+import { errorModal } from "components/Error/Error";
 
 export const fetchPatientById = (id) => (dispatch) => {
   dispatch(is_loading());
@@ -13,10 +13,5 @@ export const fetchPatientById = (id) => (dispatch) => {
     .then(({ data }) => {
       dispatch(fetch_selected_patient(data));
     })
-    .catch((e) =>
-      Modal.error({
-        title: "Ошибка",
-        content: e.message,
-      })
-    );
+    .catch((e) => errorModal(e));
 };

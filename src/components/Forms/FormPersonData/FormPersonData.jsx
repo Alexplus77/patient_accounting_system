@@ -59,7 +59,10 @@ const FormPersonData = () => {
           name="dateOfBirth"
           rules={[{ required: true, message: "Не указали дату рождения" }]}
         >
-          <DatePicker style={{ width: "100%" }} />
+          <DatePicker
+            style={{ width: "100%" }}
+            format={["DD-MM-YYYY ", "DD-MM-YYYY "]}
+          />
         </Form.Item>
         <Form.Item
           label={<label>Номер телефона</label>}
