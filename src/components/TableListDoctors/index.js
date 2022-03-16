@@ -1,0 +1,1 @@
+export { TableListDoctors } from "./TableListDoctors";

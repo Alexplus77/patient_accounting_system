@@ -1,17 +1,15 @@
 import React from "react";
 import "./Header.css";
-import { NavLink } from "react-router-dom";
+import { HeaderAdministrator } from "components/HeaderAdministrator";
+import { HeaderSuperAdministrator } from "components/HeaderSuperAdministrator";
 
 const Header = () => {
+  const role = "superAdmin";
   return (
     <header className="header-container">
       <i className="logo">Patient Accounting System</i>
-      <NavLink className="nav-link" to={"/administrator"}>
-        Список пациентов
-      </NavLink>
-      <NavLink className="nav-link" to={"/addNewPatient"}>
-        Добавить в список пациента
-      </NavLink>
+      {role === "admin" && <HeaderAdministrator />}
+      {role === "superAdmin" && <HeaderSuperAdministrator />}
     </header>
   );
 };

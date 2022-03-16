@@ -1,15 +1,24 @@
 import { Button, DatePicker, Form, Input, InputNumber, Select } from "antd";
 import React, { useEffect, useRef } from "react";
 import "./FormPersonData.css";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
+import { useParams } from "react-router-dom";
+import { useForm } from "antd/es/form/Form";
 
-const FormPersonData = () => {
+const FormPersonData = ({ selectItem, setForms }) => {
+  const [form] = useForm();
+  const params = useParams();
+
+  useEffect(() => {
+    !params.id && form.resetFields();
+  }, [params.id]);
+  const role = "superAdmin";
   const { onEditMode, selectedPatient, errors } = useSelector(
     (state) => state.storeReducer
   );
-  const dateOfBirth =
-    selectedPatient.patientPersonalData?.personData.dateOfBirth;
+
+  const dateOfBirth = selectItem?.personData?.dateOfBirth;
 
   const rulesForm = [
     { required: true },
@@ -28,12 +37,13 @@ const FormPersonData = () => {
       <div className="background-form" />
       <h2 className="title">Личные данные</h2>
       <Form
+        form={form}
         className="form-enter-user"
         name="formPersonData"
         initialValues={
-          onEditMode
+          params.id
             ? {
-                ...selectedPatient.patientPersonalData?.personData,
+                ...selectItem?.personData,
                 dateOfBirth: moment(dateOfBirth),
               }
             : { remember: true }
@@ -59,10 +69,7 @@ const FormPersonData = () => {
           name="dateOfBirth"
           rules={[{ required: true, message: "Не указали дату рождения" }]}
         >
-          <DatePicker
-            style={{ width: "100%" }}
-            format={["DD-MM-YYYY ", "DD-MM-YYYY "]}
-          />
+          <DatePicker style={{ width: "100%" }} format={["DD-MM-YYYY "]} />
         </Form.Item>
         <Form.Item
           label={<label>Номер телефона</label>}
@@ -75,24 +82,25 @@ const FormPersonData = () => {
             placeholder="Введите номер телефона"
           />
         </Form.Item>
-        <Form.Item label={<label>Пол</label>} name={"sex"}>
+        <Form.Item
+          hidden={role === "superAdmin"}
+          label={<label>Пол</label>}
+          name={"sex"}
+        >
           <Select>
             <Select.Option value="Мужской">Мужской</Select.Option>
             <Select.Option value="Женский">Женский</Select.Option>
           </Select>
         </Form.Item>
-        <Form.Item label={<label>Группа клиентов</label>} name={"groupClient"}>
+        <Form.Item
+          hidden={role === "superAdmin"}
+          label={<label>Группа клиентов</label>}
+          name={"groupClient"}
+        >
           <Select>
             <Select.Option value="VIP">VIP</Select.Option>
             <Select.Option value="Проблемные">Проблемные</Select.Option>
             <Select.Option value="ОМС">ОМС</Select.Option>
-          </Select>
-        </Form.Item>
-        <Form.Item label={<label>Врачи</label>} name={"doctor"}>
-          <Select>
-            <Select.Option value={"Ковалев"}>Ковалев А.П.</Select.Option>
-            <Select.Option value={"Левашова"}>Левашова А.В.</Select.Option>
-            <Select.Option value={"Иванов И.И."}>Иванов И.И.</Select.Option>
           </Select>
         </Form.Item>
       </Form>

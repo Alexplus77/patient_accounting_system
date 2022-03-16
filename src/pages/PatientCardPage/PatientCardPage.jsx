@@ -1,21 +1,19 @@
 import React, { useEffect } from "react";
 import "./PatientCardPage.css";
-import { Card, Row, Col, Typography, Button } from "antd";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Typography } from "antd";
+import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPatientById } from "redux/middlewares/fetchPatientById";
-import { titleTablePatient } from "commonsFiles/titleTablePatient";
-import { fetchDeletePatient } from "redux/middlewares/fetchDeletePatient";
+import { fetchPatientById } from "redux/middlewares/middlewaresPanelAdministrator/fetchPatientDB/fetchPatientById";
+import { titleTablePatient } from "commonsFiles/titlesForTableCards/titleTablePatient";
+import { fetchDeletePatient } from "redux/middlewares/middlewaresPanelAdministrator/fetchPatientDB/fetchDeletePatient";
 import { on_edit_mode } from "redux/actions/createActions";
-import { format } from "date-fns";
+import { CardItem } from "components/CardItem";
 
 const PatientCardPage = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const navigate = useNavigate();
-  const { selectedPatient, loading } = useSelector(
-    (state) => state.storeReducer
-  );
+  const { selectedPatient } = useSelector((state) => state.storeReducer);
   const id = params.id;
 
   useEffect(() => {
@@ -43,64 +41,15 @@ const PatientCardPage = () => {
           <i>{patientPersonalData?.personData.patronymic}</i>
         </div>
       </Typography.Title>
-      <div className="card-container">
-        <div className="background-card" />
-        <Row className="rowCard">
-          {patientPersonalData &&
-            Object.entries(titleTablePatient).map((el) => {
-              const rowsCard = Object.entries(el[1]);
-              rowsCard.splice(0, 1);
-              return (
-                <Col key={el[1].title} className="columns-card">
-                  <Card
-                    loading={loading}
-                    key={el[1].title}
-                    className="card-patient"
-                    title={
-                      <i key={el[1].title} style={{ color: "white" }}>
-                        {el[1].title}
-                      </i>
-                    }
-                  >
-                    {rowsCard.map((elem) => {
-                      if (
-                        elem[0] === "dateOfBirth" ||
-                        elem[0] === "dateOfIssue"
-                      ) {
-                        return (
-                          <p key={elem[1]}>
-                            {elem[1]}:{" "}
-                            {format(
-                              new Date(patientPersonalData[el[0]][elem[0]]),
-                              "dd.MM.yyyy"
-                            ) || "Не указано"}{" "}
-                          </p>
-                        );
-                      }
-                      return (
-                        <p key={elem[1]}>
-                          {elem[1]}:{" "}
-                          {patientPersonalData[el[0]][elem[0]] || "Не указано"}{" "}
-                        </p>
-                      );
-                    })}
-                  </Card>
-                </Col>
-              );
-            })}
-          <div className="btns-patient-card">
-            <Button className="btn" onClick={() => handleOnEditMode(id)}>
-              Изменить
-            </Button>
-            <Button className="btn" onClick={() => handleRemovePatient(id)}>
-              Удалить
-            </Button>{" "}
-            <Button className="btn" style={{ width: "100px" }}>
-              <Link to={-1}>Назад</Link>
-            </Button>
-          </div>
-        </Row>
-      </div>
+      {patientPersonalData && (
+        <CardItem
+          handleOnEditMode={handleOnEditMode}
+          handleRemovePatient={handleRemovePatient}
+          titleCard={titleTablePatient}
+          selectedItem={patientPersonalData}
+          id={id}
+        />
+      )}
     </div>
   );
 };

@@ -1,0 +1,29 @@
+.card-container{
+    position: relative;
+    display: grid;
+    justify-self: center;
+
+}
+.background-card{
+    position: absolute;
+    height: 100%;
+    width: 670px;
+    background-color: #161616;
+    opacity: 60%;
+}
+.rowCard{
+    display: grid;
+    grid-auto-flow: column;
+    gap: 10px;
+    justify-self: center;
+    height: 100%;
+}
+
+.btns-patient-card{
+    display: grid;
+    height: 120px;
+}
+.card-patient{color:white;
+    background: none;
+    height: 380px;
+}

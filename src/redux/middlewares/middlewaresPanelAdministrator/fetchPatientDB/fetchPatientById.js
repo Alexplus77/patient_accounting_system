@@ -1,8 +1,5 @@
 import axios from "axios";
-import {
-  fetch_selected_patient,
-  save_error,
-} from "redux/actions/createActions";
+import { fetch_selected_patient } from "redux/actions/createActions";
 import { is_loading } from "redux/actions/createActions";
 import { errorModal } from "components/Error/Error";
 

@@ -1,0 +1,1 @@
+export { AdministratorCardPage } from "./AdministratorCardPage";

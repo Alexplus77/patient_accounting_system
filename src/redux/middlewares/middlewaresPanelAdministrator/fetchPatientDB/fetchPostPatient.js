@@ -1,5 +1,5 @@
 import axios from "axios";
-import { fetchNewPatient, save_error } from "redux/actions/createActions";
+import { fetchNewPatient } from "redux/actions/createActions";
 import { is_loading } from "redux/actions/createActions";
 import { errorModal } from "components/Error/Error";
 
@@ -8,5 +8,8 @@ export const fetchPostPatient = (data) => (dispatch) => {
   axios
     .post(`${process.env.REACT_APP_URL}/newPatient`, data)
     .then(({ data }) => dispatch(fetchNewPatient()))
-    .catch((e) => errorModal(e));
+    .catch((e) => {
+      console.log(e);
+      errorModal(e);
+    });
 };

@@ -1,0 +1,1 @@
+export { AddNewAdministratorPage } from "./AddNewAdministratorPage";

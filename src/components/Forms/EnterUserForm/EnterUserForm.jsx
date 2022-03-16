@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Form, Input, Select, Button } from "antd";
 import "./EnterUserForm.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { fetchAuthUser } from "redux/middlewares/fetchAuthUser";
+import { useDispatch, useSelector } from "react-redux";
 
 const EnterUserForm = () => {
-  const onFinish = (values) => {
-    console.log("Success:", values);
-  };
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { authUser } = useSelector((state) => state?.stuffReducer);
 
+  const onFinish = (values) => {
+    dispatch(fetchAuthUser(values));
+  };
+  useEffect(() => {
+    authUser.path && navigate(authUser.path);
+  }, [authUser]);
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
@@ -41,7 +49,7 @@ const EnterUserForm = () => {
         <Form.Item
           rules={[{ required: true }]}
           label={<label>Выберите роль</label>}
-          name="select-role"
+          name="selectRole"
         >
           <Select placeholder="Выберите роль">
             <Select.Option value="superAdmin">
@@ -70,12 +78,7 @@ const EnterUserForm = () => {
           <Input.Password placeholder="Введите пароль" />
         </Form.Item>
         <Form.Item>
-          <div className="btn-group">
-            <Button>
-              <Link to={"/administrator"}> Войти</Link>
-            </Button>
-            <Button>Регистрация</Button>
-          </div>
+          <Button htmlType="submit">Войти</Button>
         </Form.Item>
       </Form>
     </div>

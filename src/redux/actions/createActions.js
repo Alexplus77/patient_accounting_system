@@ -6,8 +6,34 @@ import {
   EXIT_EDIT_MODE,
   SAVE_ERROR,
   IS_LOADING,
+  FETCH_NEW_DOCTOR,
+  FETCH_DOCTORS_LIST,
+  FETCH_SELECTED_STUFF,
+  SELECTED_ADD_STUFF,
+  FETCH_NEW_ADMINISTRATOR,
+  FETCH_ADMINISTRATORS_LIST,
+  AUTH_USER,
 } from "./actionsTypes";
-
+export const auth_user = (data) => ({
+  type: AUTH_USER,
+  payload: data,
+});
+export const add_selected_stuff = (data) => ({
+  type: SELECTED_ADD_STUFF,
+  payload: data,
+});
+export const fetch_selected_stuff = (data) => ({
+  type: FETCH_SELECTED_STUFF,
+  payload: data,
+});
+export const fetchDoctorsList = (data) => ({
+  type: FETCH_DOCTORS_LIST,
+  payload: data,
+});
+export const fetchAdministratorsList = (data) => ({
+  type: FETCH_ADMINISTRATORS_LIST,
+  payload: data,
+});
 export const is_loading = () => ({
   type: IS_LOADING,
 });
@@ -20,7 +46,12 @@ export const fetchPatientList = (data) => ({
 export const fetchNewPatient = () => ({
   type: FETCH_NEW_PATIENT,
 });
-
+export const fetchNewAdministrator = () => ({
+  type: FETCH_NEW_ADMINISTRATOR,
+});
+export const fetchNewDoctor = () => ({
+  type: FETCH_NEW_DOCTOR,
+});
 export const fetch_selected_patient = (data) => ({
   type: FETCH_SELECTED_PATIENT,
   payload: data,

@@ -1,40 +1,42 @@
 import React, { useEffect } from "react";
 
-import {
-  Form,
-  Input,
-  Button,
-  Typography,
-  Select,
-  DatePicker,
-  InputNumber,
-} from "antd";
-import { format, add, parse, addDays } from "date-fns";
+import { Form, Input, Button, Select, DatePicker } from "antd";
+
 import moment from "moment";
 import "./FormPassport.css";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useForm } from "antd/es/form/Form";
 
-const FormPassport = ({ clearForms, valueForm }) => {
+const FormPassport = ({
+  clearForms,
+  valueForm,
+  selectItem,
+  onRegistrationMode,
+}) => {
+  const role = "superAdmin";
   const { onEditMode, selectedPatient } = useSelector(
     (state) => state.storeReducer
   );
-
-  const dateOfIssue =
-    selectedPatient.patientPersonalData?.passportData.dateOfIssue;
+  const [form] = useForm();
+  const params = useParams();
+  useEffect(() => {
+    !params.id && form.resetFields();
+  }, [params.id]);
+  const dateOfIssue = selectItem?.passportData?.dateOfIssue;
 
   return (
     <div className="container-formPassport">
       <div className="background-form" />
       <h2 className="title">Паспорт</h2>
       <Form
+        form={form}
         className="form-passport"
         name="formPassport"
         initialValues={
           onEditMode
             ? {
-                ...selectedPatient.patientPersonalData?.passportData,
+                ...selectItem?.passportData,
                 dateOfIssue: moment(dateOfIssue),
               }
             : { remember: true }
@@ -72,6 +74,22 @@ const FormPassport = ({ clearForms, valueForm }) => {
           rules={[{ required: true, message: "Не указали дату выдачи" }]}
         >
           <DatePicker style={{ width: "100%" }} />
+        </Form.Item>
+        <Form.Item
+          hidden={role !== "superAdmin"}
+          label={<label>Логин</label>}
+          name="login"
+          rules={[{ required: true, message: "Не указали логин" }]}
+        >
+          <Input style={{ fontSize: "16px" }} placeholder="Логин" />
+        </Form.Item>
+        <Form.Item
+          hidden={role !== "superAdmin"}
+          label={<label>Пароль</label>}
+          name="password"
+          rules={[{ required: true, message: "Не указали пароль" }]}
+        >
+          <Input.Password style={{ fontSize: "16px" }} placeholder="Пароль" />
         </Form.Item>
         <Form.Item>
           <div className="btn-form-passport">

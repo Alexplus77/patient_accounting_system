@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Form, Input, InputNumber } from "antd";
 import "./FormAddress.css";
 import { useDispatch, useSelector } from "react-redux";
 import { initialValueDefault } from "commonsFiles/initialValueDefault";
+import { useForm } from "antd/es/form/Form";
+import { useParams } from "react-router-dom";
 
-const FormAddress = () => {
-  const { onEditMode, selectedPatient } = useSelector(
-    (state) => state.storeReducer
-  );
+const FormAddress = ({ selectItem }) => {
+  const { onEditMode } = useSelector((state) => state.storeReducer);
+  const [form] = useForm();
+  const params = useParams();
+  useEffect(() => {
+    !params.id && form.resetFields();
+  }, [params.id]);
   const rulesForm = [
     { required: true },
     { whitespace: true },
@@ -27,12 +32,11 @@ const FormAddress = () => {
       <div className="background-form" />
       <h2 className="title">Адрес</h2>
       <Form
+        form={form}
         className="form-address"
         name="formAddress"
         initialValues={
-          onEditMode
-            ? selectedPatient.patientPersonalData?.addressData
-            : initialValueDefault
+          onEditMode ? selectItem?.addressData : initialValueDefault
         }
         autoComplete="off"
         layout="horizontal"

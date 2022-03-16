@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchGetPatientList } from "redux/middlewares/fetchGetPatientList";
+import { fetchGetPatientList } from "redux/middlewares/middlewaresPanelAdministrator/fetchPatientDB/fetchGetPatientList";
 import { Table, Typography } from "antd";
-import { useColumnsTableListPatients } from "commonsFiles/columnsTableListPatient";
+import { useColumnsTableListPatients } from "commonsFiles/columnsForTables/columnsTableListPatient";
 import "./TableListPatient.css";
 
 const TableListPatients = () => {

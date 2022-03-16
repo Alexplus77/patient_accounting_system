@@ -34,12 +34,12 @@ label{
     color: white;
 }
 .btn-form-passport{
-    margin-top: 100px;
+
     display: grid;
    gap: 20px;
     grid-auto-flow: column;
 }
 .btn{
     background-color: rgba(14, 14, 14, 0.31);
-    color: white;
-}
+    color: white;}
+

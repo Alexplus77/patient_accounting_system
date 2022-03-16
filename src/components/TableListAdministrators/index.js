@@ -1,0 +1,1 @@
+export { TableListAdministrators } from "./TableListAdministrators";

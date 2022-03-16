@@ -1,0 +1,1 @@
+export { HeaderAdministrator } from "./HeaderAdministrator";

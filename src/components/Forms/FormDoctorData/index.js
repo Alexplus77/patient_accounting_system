@@ -1,0 +1,1 @@
+export { FormDoctorData } from "./FormDoctorData";

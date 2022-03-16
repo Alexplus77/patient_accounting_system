@@ -1,0 +1,1 @@
+export { SuperAdministratorPage } from "./SuperAdministratorPage";
