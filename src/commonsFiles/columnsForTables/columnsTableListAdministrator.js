@@ -3,7 +3,7 @@ import { on_edit_mode } from "redux/actions/createActions";
 import { fetchAdministratorById } from "redux/middlewares/middlewaresPanelSuperAdministrator/fetchAdministratorDB/fetchAdministratorById";
 import { Link, useNavigate } from "react-router-dom";
 import { DeleteOutlined, EditTwoTone, SearchOutlined } from "@ant-design/icons";
-import { onFilterDropDown } from "components/FilterDropDown/onFillterDropDown";
+import { Tooltip, Popconfirm } from "antd";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { propsFilterLastName } from "components/FilterDropDown/propsFilterLastName";
@@ -52,14 +52,22 @@ export const useColumnsTableListAdministrators = () => {
       render: (record) => {
         return (
           <div className="icon-group">
-            <EditTwoTone
-              onClick={() => handleOnEditMode(record.id)}
-              className="icon"
-            />
-            <DeleteOutlined
-              onClick={() => handleRemoveAdministrator(record.id)}
-              className="icon"
-            />
+            <Tooltip title={"Редактировать"}>
+              <EditTwoTone
+                onClick={() => handleOnEditMode(record.id)}
+                className="icon"
+              />
+            </Tooltip>
+            <Tooltip title={"Удалить"}>
+              <Popconfirm
+                title={"Вы уверены, что хотите удалить администратора?"}
+                onConfirm={() => handleRemoveAdministrator(record.id)}
+                okText="Yes"
+                cancelText="No"
+              >
+                <DeleteOutlined className="icon" />
+              </Popconfirm>
+            </Tooltip>
           </div>
         );
       },

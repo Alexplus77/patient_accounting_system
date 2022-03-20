@@ -1,7 +1,7 @@
 .header-container{
     display: grid;
     grid-auto-flow: column;
-    height: 100px;
+    height: 70px;
     width: 100%;
     padding-left: 10px;
     align-items: center;
@@ -9,5 +9,5 @@
 }
 .logo{
     color: white;
-    font-size: 50px;
+    font-size: 30px;
 }

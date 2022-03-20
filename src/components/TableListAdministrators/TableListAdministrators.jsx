@@ -1,5 +1,6 @@
 import { Table, Typography } from "antd";
 import React, { useEffect } from "react";
+import "./TableListAdministrators.css";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchGetAdministratorsList } from "redux/middlewares/middlewaresPanelSuperAdministrator/fetchAdministratorDB/fetchGetAdministratorsList";
 import { useColumnsTableListAdministrators } from "commonsFiles/columnsForTables/columnsTableListAdministrator";
@@ -22,6 +23,7 @@ export const TableListAdministrators = () => {
         Список администраторов
       </Typography.Title>
       <Table
+        rowClassName="rowTable-list"
         pagination={{ defaultPageSize: 5 }}
         dataSource={administratorsList.map((el) => {
           return { ...el.administratorPersonalData, id: el._id };

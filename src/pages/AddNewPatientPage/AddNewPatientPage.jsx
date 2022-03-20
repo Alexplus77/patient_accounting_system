@@ -11,6 +11,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { exit_edit_mode, on_edit_mode } from "redux/actions/createActions";
 import { fetchPatientById } from "redux/middlewares/middlewaresPanelAdministrator/fetchPatientDB/fetchPatientById";
 import { fetchUpdatePatient } from "redux/middlewares/middlewaresPanelAdministrator/fetchPatientDB/fetchUpdatePatient";
+import { fetchVerifyAuthUser } from "../../redux/middlewares/fetchVerifyAuthUser";
 
 const AddNewPatientPage = () => {
   const { onEditMode, errors, selectedPatient } = useSelector(
@@ -23,6 +24,7 @@ const AddNewPatientPage = () => {
     "Не все поля со звездочкой заполнены или заполнены с ошибкой";
 
   useEffect(() => {
+    dispatch(fetchVerifyAuthUser());
     if (params.id) {
       dispatch(fetchPatientById(params.id));
       dispatch(on_edit_mode);
@@ -41,52 +43,56 @@ const AddNewPatientPage = () => {
 
   const navigate = useNavigate();
   return (
-    <Form.Provider
-      onFormChange={(name, { forms }) => {
-        setValueForm({ ...valueForm, ...forms });
-      }}
-      onFormFinish={(name, { values, forms }) => {
-        const { formAddress, formPassport, formPersonData } = forms;
-        const valueUser = {
-          personData: formPersonData.getFieldsValue(),
-          addressData: formAddress.getFieldsValue(),
-          passportData: formPassport.getFieldsValue(),
-        };
-        if (validateFormsAddPatient(forms)) {
-          Modal.error({
-            title: "Ошибка",
-            content: errorMassage,
-          });
-        } else {
-          !params.id
-            ? dispatch(fetchPostPatient(valueUser))
-            : dispatch(fetchUpdatePatient(params.id, valueUser));
+    <div className="container-addPatient-page">
+      <Form.Provider
+        onFormChange={(name, { forms }) => {
+          setValueForm({ ...valueForm, ...forms });
+        }}
+        onFormFinish={(name, { values, forms }) => {
+          console.log(name);
+          const { formAddress, formPassport, formPersonData } = forms;
+          const valueUser = {
+            personData: formPersonData.getFieldsValue(),
+            addressData: formAddress.getFieldsValue(),
+            passportData: formPassport.getFieldsValue(),
+          };
 
-          clearForms({ formAddress, formPassport, formPersonData });
-          navigate("/administrator");
-        }
-      }}
-    >
-      {params.id ? (
-        selectedPatient?.patientPersonalData && (
+          if (validateFormsAddPatient(forms)) {
+            Modal.error({
+              title: "Ошибка",
+              content: errorMassage,
+            });
+          } else {
+            !params.id
+              ? dispatch(fetchPostPatient(valueUser))
+              : dispatch(fetchUpdatePatient(params.id, valueUser));
+
+            clearForms({ formAddress, formPassport, formPersonData });
+            navigate("/administrator");
+          }
+        }}
+      >
+        {params.id ? (
+          selectedPatient?.patientPersonalData && (
+            <div className="container-forms-addPatient">
+              <FormPersonData selectItem={selectItem} />
+              <FormAddress selectItem={selectItem} />
+              <FormPassport
+                selectItem={selectItem}
+                valueForm={valueForm}
+                clearForms={clearForms}
+              />
+            </div>
+          )
+        ) : (
           <div className="container-forms-addPatient">
-            <FormPersonData selectItem={selectItem} />
-            <FormAddress selectItem={selectItem} />
-            <FormPassport
-              selectItem={selectItem}
-              valueForm={valueForm}
-              clearForms={clearForms}
-            />
+            <FormPersonData />
+            <FormAddress />
+            <FormPassport valueForm={valueForm} clearForms={clearForms} />
           </div>
-        )
-      ) : (
-        <div className="container-forms-addPatient">
-          <FormPersonData />
-          <FormAddress />
-          <FormPassport valueForm={valueForm} clearForms={clearForms} />
-        </div>
-      )}
-    </Form.Provider>
+        )}
+      </Form.Provider>
+    </div>
   );
 };
 export { AddNewPatientPage };

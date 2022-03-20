@@ -2,44 +2,22 @@ label{
     color: white;
     font-size: 18px;
 }
-.form-passport{
-    display: grid;
-    margin-top: 30px;
-    position: absolute;
-    width: 400px;
-    padding: 20px;
 
-}
-.container-formPassport{
-    position: relative;
-    display: grid;
-    margin-top:2%;
-    width: 400px;
 
-}
-.background-form{
-    position: fixed;
-    background-color: #161616;
-    width: 400px;
-    opacity: 60%;
-    z-index: 0;
-}
-.title{
-    position: absolute;
-    margin-top: 10px;
-    color: white;
-    justify-self: center;
-}
+
+
 label{
     color: white;
 }
 .btn-form-passport{
-
     display: grid;
-   gap: 20px;
+   gap: 10px;
     grid-auto-flow: column;
 }
 .btn{
     background-color: rgba(14, 14, 14, 0.31);
     color: white;}
-
+.title-passportData{
+    color: white;
+    justify-self: center;
+}

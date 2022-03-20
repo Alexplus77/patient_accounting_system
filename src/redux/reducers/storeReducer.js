@@ -6,6 +6,7 @@ import {
   EXIT_EDIT_MODE,
   SAVE_ERROR,
   IS_LOADING,
+  FORM_IS_VISIBLE,
 } from "redux/actions/actionsTypes";
 
 const initialState = {
@@ -15,9 +16,12 @@ const initialState = {
   onEditMode: false,
   errors: {},
   loading: false,
+  formIsVisible: false,
 };
 const storeReducer = (state = initialState, action) => {
   switch (action.type) {
+    case FORM_IS_VISIBLE:
+      return { ...state, formIsVisible: action.payload };
     case IS_LOADING:
       return { ...state, loading: true };
     case SAVE_ERROR:

@@ -1,7 +1,8 @@
 .container-superAdmin-page{
     display: grid;
     justify-self: center;
-    gap: 50px;
+
+    gap: 100px;
     grid-auto-flow: column;
     padding: 10px;
     color:white;

@@ -8,6 +8,7 @@ import { titleTableDoctor } from "commonsFiles/titlesForTableCards/titleTableDoc
 import { fetchDeleteDoctor } from "redux/middlewares/middlewaresPanelSuperAdministrator/fetchDoctorDB/fetchDeleteDoctor";
 import { on_edit_mode } from "redux/actions/createActions";
 import { CardItem } from "components/CardItem";
+import { fetchVerifyAuthUser } from "redux/middlewares/fetchVerifyAuthUser";
 
 const DoctorCardPage = () => {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ const DoctorCardPage = () => {
   const id = params.id;
 
   useEffect(() => {
+    dispatch(fetchVerifyAuthUser());
     dispatch(fetchDoctorById(id));
   }, []);
 

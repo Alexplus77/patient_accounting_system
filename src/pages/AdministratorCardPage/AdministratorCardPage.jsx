@@ -8,6 +8,7 @@ import { on_edit_mode } from "redux/actions/createActions";
 import { CardItem } from "components/CardItem";
 import { fetchAdministratorById } from "redux/middlewares/middlewaresPanelSuperAdministrator/fetchAdministratorDB/fetchAdministratorById";
 import { fetchDeleteAdministrator } from "redux/middlewares/middlewaresPanelSuperAdministrator/fetchAdministratorDB/fetchDeleteAdministrator";
+import { fetchVerifyAuthUser } from "redux/middlewares/fetchVerifyAuthUser";
 
 const AdministratorCardPage = () => {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ const AdministratorCardPage = () => {
   const id = params.id;
 
   useEffect(() => {
+    dispatch(fetchVerifyAuthUser());
     dispatch(fetchAdministratorById(id));
   }, []);
 

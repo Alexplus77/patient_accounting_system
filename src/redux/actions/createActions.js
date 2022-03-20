@@ -13,7 +13,20 @@ import {
   FETCH_NEW_ADMINISTRATOR,
   FETCH_ADMINISTRATORS_LIST,
   AUTH_USER,
+  LOGOUT,
+  IS_AUTH,
+  FORM_IS_VISIBLE,
 } from "./actionsTypes";
+export const is_form_visible = (data) => ({
+  type: FORM_IS_VISIBLE,
+  payload: data,
+});
+export const is_auth = () => ({
+  type: IS_AUTH,
+});
+export const log_out = () => ({
+  type: LOGOUT,
+});
 export const auth_user = (data) => ({
   type: AUTH_USER,
   payload: data,

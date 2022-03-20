@@ -11,6 +11,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { exit_edit_mode, on_edit_mode } from "redux/actions/createActions";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchAdministratorById } from "redux/middlewares/middlewaresPanelSuperAdministrator/fetchAdministratorDB/fetchAdministratorById";
+import { fetchVerifyAuthUser } from "../../redux/middlewares/fetchVerifyAuthUser";
 
 const AddNewAdministratorPage = () => {
   const { selectStaff } = useSelector((state) => state?.stuffReducer);
@@ -23,6 +24,7 @@ const AddNewAdministratorPage = () => {
   const [valueForm, setValueForm] = useState({});
 
   useEffect(() => {
+    dispatch(fetchVerifyAuthUser());
     if (params.id) {
       dispatch(fetchAdministratorById(params.id));
       dispatch(on_edit_mode);
@@ -76,9 +78,7 @@ const AddNewAdministratorPage = () => {
         {params.id ? (
           selectStaff?.administratorPersonalData && (
             <div className="container-forms-addPatient">
-              <div className="doctor-data">
-                <FormPersonData selectItem={selectItem} />
-              </div>
+              <FormPersonData selectItem={selectItem} />
               <FormAddress selectItem={selectItem} />
               <FormPassport
                 selectItem={selectItem}
@@ -89,9 +89,7 @@ const AddNewAdministratorPage = () => {
           )
         ) : (
           <div className="container-forms-addPatient">
-            <div className="doctor-data">
-              <FormPersonData />
-            </div>
+            <FormPersonData />
             <FormAddress />
             <FormPassport valueForm={valueForm} clearForms={clearForms} />
           </div>

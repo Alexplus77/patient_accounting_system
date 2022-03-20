@@ -2,8 +2,7 @@
     display: grid;
     justify-items: center;
     width: 1300px;
-    margin-top: 20px;
-align-self: center;
+    margin-top: 70px;
 }
 .title-table{
     color: white;
@@ -18,6 +17,7 @@ align-self: center;
 .icon{
     cursor: pointer;
     font-size: 20px;
+
 }
 .icon:hover{
     font-size: 22px;

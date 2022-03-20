@@ -6,6 +6,7 @@ import {
   ON_EDIT_MODE,
   EXIT_EDIT_MODE,
   AUTH_USER,
+  LOGOUT,
 } from "redux/actions/actionsTypes";
 
 const initialState = {
@@ -16,11 +17,14 @@ const initialState = {
   registrationMode: false,
   valueForm: {},
   authUser: {},
+  isAuth: null,
 };
 export const stuffReducer = (state = initialState, action) => {
   switch (action.type) {
+    case LOGOUT:
+      return { ...state, authUser: {}, isAuth: false };
     case AUTH_USER:
-      return { ...state, authUser: action.payload };
+      return { ...state, authUser: action.payload, isAuth: true };
     case EXIT_EDIT_MODE:
       return { ...state, selectStaff: {} };
     case ON_EDIT_MODE:

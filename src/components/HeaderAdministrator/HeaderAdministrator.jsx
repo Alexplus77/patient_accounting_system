@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import "./HeaderAdministrator.css";
+import { AuthUserCard } from "components/AuthUserCard";
 
 const HeaderAdministrator = () => {
   return (
@@ -9,8 +10,9 @@ const HeaderAdministrator = () => {
         Список пациентов
       </NavLink>
       <NavLink className="nav-link" to={"/addNewPatient"}>
-        Добавить в список пациента
+        Добавить пациента
       </NavLink>
+      <AuthUserCard />
     </div>
   );
 };

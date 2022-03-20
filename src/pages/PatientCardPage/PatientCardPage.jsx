@@ -8,6 +8,7 @@ import { titleTablePatient } from "commonsFiles/titlesForTableCards/titleTablePa
 import { fetchDeletePatient } from "redux/middlewares/middlewaresPanelAdministrator/fetchPatientDB/fetchDeletePatient";
 import { on_edit_mode } from "redux/actions/createActions";
 import { CardItem } from "components/CardItem";
+import { fetchVerifyAuthUser } from "../../redux/middlewares/fetchVerifyAuthUser";
 
 const PatientCardPage = () => {
   const dispatch = useDispatch();
@@ -17,13 +18,14 @@ const PatientCardPage = () => {
   const id = params.id;
 
   useEffect(() => {
+    dispatch(fetchVerifyAuthUser());
     dispatch(fetchPatientById(id));
   }, []);
 
   const handleOnEditMode = (id) => {
     dispatch(on_edit_mode());
     dispatch(fetchPatientById(id));
-    navigate(`/patientEdit${id}`);
+    navigate(`/addNewPatient${id}`);
   };
   const handleRemovePatient = (id) => {
     dispatch(fetchDeletePatient(id));

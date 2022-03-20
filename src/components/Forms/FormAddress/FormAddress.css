@@ -2,34 +2,8 @@ label{
     color: white;
     font-size: 18px;
 }
-.form-address{
-    display: grid;
-    margin-top: 30px;
-    position: absolute;
-    width: 400px;
-    padding: 20px;
 
-}
-.container-formAddress{
-    position: relative;
-    display: grid;
-    margin-top:2%;
-    width: 400px;
 
-}
-.background-form{
-    position: fixed;
-    background-color: #161616;
-    width: 400px;
-    opacity: 60%;
-    z-index: 0;
-}
-.title{
-    position: absolute;
-    margin-top: 10px;
-    color: white;
-    justify-self: center;
-}
-label{
-    color: white;
-}
+
+
+

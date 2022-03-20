@@ -1,18 +1,25 @@
 import { Link, useNavigate } from "react-router-dom";
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { DeleteTwoTone, EditTwoTone } from "@ant-design/icons";
+import { Tooltip, Popconfirm } from "antd";
 import React from "react";
 import { fetchDeletePatient } from "redux/middlewares/middlewaresPanelAdministrator/fetchPatientDB/fetchDeletePatient";
 import { fetchPatientById } from "redux/middlewares/middlewaresPanelAdministrator/fetchPatientDB/fetchPatientById";
-import { on_edit_mode } from "redux/actions/createActions";
+import {
+  fetch_selected_patient,
+  on_edit_mode,
+} from "redux/actions/createActions";
 import { useDispatch, useSelector } from "react-redux";
 import { format } from "date-fns";
 import { propsFilterLastName } from "components/FilterDropDown/propsFilterLastName";
 import "components/TableListPatients/TableListPatient.css";
 import { propsFilterName } from "components/FilterDropDown/propsFilterName";
 import { propsFilterAddress } from "components/FilterDropDown/propsFilterAddress";
+import "../../components/TableListPatients/TableListPatient.css";
+import { is_form_visible } from "redux/actions/createActions";
 
 export const useColumnsTableListPatients = () => {
   const { selectedPatient } = useSelector((state) => state.storeReducer);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleRemovePatient = (id) => {
@@ -23,6 +30,11 @@ export const useColumnsTableListPatients = () => {
     dispatch(on_edit_mode());
     dispatch(fetchPatientById(id));
     navigate(`/addNewPatient${id}`);
+  };
+
+  const handleDoctorsAppointment = (data) => {
+    dispatch(fetch_selected_patient(data));
+    dispatch(is_form_visible(true));
   };
 
   return [
@@ -61,7 +73,7 @@ export const useColumnsTableListPatients = () => {
       ],
     },
     {
-      title: "Адресс",
+      title: "Адрес",
       children: [
         {
           title: "Город",
@@ -85,10 +97,19 @@ export const useColumnsTableListPatients = () => {
       ],
     },
     {
-      title: "Врач",
-      render: (text, { personData }) => (
-        <i>{personData.doctor || "Не указано"}</i>
-      ),
+      title: "Запись к врачу",
+      render: (text, record) => {
+        return (
+          <div className="icon-group">
+            <Tooltip title={"Редактировать"}>
+              <EditTwoTone
+                className="icon"
+                onClick={() => handleDoctorsAppointment(record)}
+              />
+            </Tooltip>
+          </div>
+        );
+      },
     },
 
     {
@@ -96,14 +117,22 @@ export const useColumnsTableListPatients = () => {
       key: "actions",
       render: (text, record) => (
         <div className="icon-group">
-          <DeleteOutlined
-            onClick={() => handleRemovePatient(record.id)}
-            className="icon"
-          />
-          <EditOutlined
-            className="icon"
-            onClick={() => handleOnEditMode(record.id)}
-          />
+          <Tooltip title={"Удалить"}>
+            <Popconfirm
+              title={"Вы уверены, что хотите удалить пациента?"}
+              onConfirm={() => handleRemovePatient(record.id)}
+              okText="Yes"
+              cancelText="No"
+            >
+              <DeleteTwoTone twoToneColor="red" className="icon" />
+            </Popconfirm>
+          </Tooltip>
+          <Tooltip title={"Редактировать"}>
+            <EditTwoTone
+              className="icon"
+              onClick={() => handleOnEditMode(record.id)}
+            />
+          </Tooltip>
         </div>
       ),
     },

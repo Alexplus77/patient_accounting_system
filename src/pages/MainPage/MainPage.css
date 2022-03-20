@@ -1,6 +1,5 @@
 .main-page-container{
-    position: relative;
     display: grid;
-    align-items: center;
-   align-self: center;
+
+    width: 100%;
 }

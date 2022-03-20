@@ -1,19 +1,20 @@
 .container-header-administrator{
     display: grid;
     grid-auto-flow: column;
+    align-items: center;
 }
 .nav-link{
-    font-size: 20px;
+    font-size: 18px;
     color: white;
     background: none;
 }
 .nav-link:hover{
-    font-size: 22px;
+    font-size: 20px;
     color: #a09f9f;
     background: none;
 }
 .menu-header{
     width: 300px;
     text-align: center;
-background: rgba(0, 0, 0, 0.42);
+background: rgba(0, 0, 0, 0.56);
 }

@@ -8,13 +8,10 @@ import { Link, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useForm } from "antd/es/form/Form";
 
-const FormPassport = ({
-  clearForms,
-  valueForm,
-  selectItem,
-  onRegistrationMode,
-}) => {
-  const role = "superAdmin";
+const FormPassport = ({ clearForms, valueForm, selectItem }) => {
+  const {
+    authUser: { role },
+  } = useSelector((state) => state?.stuffReducer);
   const { onEditMode, selectedPatient } = useSelector(
     (state) => state.storeReducer
   );
@@ -26,9 +23,8 @@ const FormPassport = ({
   const dateOfIssue = selectItem?.passportData?.dateOfIssue;
 
   return (
-    <div className="container-formPassport">
-      <div className="background-form" />
-      <h2 className="title">Паспорт</h2>
+    <div className="container-form-add">
+      <h2 className="title-personData">Паспорт</h2>
       <Form
         form={form}
         className="form-passport"
@@ -79,7 +75,9 @@ const FormPassport = ({
           hidden={role !== "superAdmin"}
           label={<label>Логин</label>}
           name="login"
-          rules={[{ required: true, message: "Не указали логин" }]}
+          rules={[
+            { required: role === "superAdmin", message: "Не указали логин" },
+          ]}
         >
           <Input style={{ fontSize: "16px" }} placeholder="Логин" />
         </Form.Item>
@@ -87,7 +85,9 @@ const FormPassport = ({
           hidden={role !== "superAdmin"}
           label={<label>Пароль</label>}
           name="password"
-          rules={[{ required: true, message: "Не указали пароль" }]}
+          rules={[
+            { required: role === "superAdmin", message: "Не указали пароль" },
+          ]}
         >
           <Input.Password style={{ fontSize: "16px" }} placeholder="Пароль" />
         </Form.Item>

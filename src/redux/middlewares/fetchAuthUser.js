@@ -6,7 +6,8 @@ export const fetchAuthUser = (data) => (dispatch) => {
   axios
     .post(`${process.env.REACT_APP_URL}/authUser`, data)
     .then(({ data }) => {
-      console.log("data", data);
+      console.log(data);
+      localStorage.setItem("token", data.token);
       dispatch(auth_user(data));
     })
     .catch((e) => errorModal(e));

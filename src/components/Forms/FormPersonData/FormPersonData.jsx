@@ -13,7 +13,9 @@ const FormPersonData = ({ selectItem, setForms }) => {
   useEffect(() => {
     !params.id && form.resetFields();
   }, [params.id]);
-  const role = "superAdmin";
+  const {
+    authUser: { role },
+  } = useSelector((state) => state?.stuffReducer);
   const { onEditMode, selectedPatient, errors } = useSelector(
     (state) => state.storeReducer
   );
@@ -33,12 +35,11 @@ const FormPersonData = ({ selectItem, setForms }) => {
     },
   ];
   return (
-    <div className="container-form-addPatient">
-      <div className="background-form" />
-      <h2 className="title">Личные данные</h2>
+    <div className="container-form-add">
+      <h2 className="title-personData">Личные данные</h2>
       <Form
         form={form}
-        className="form-enter-user"
+        className="form-personData"
         name="formPersonData"
         initialValues={
           params.id

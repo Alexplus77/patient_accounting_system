@@ -15,7 +15,7 @@ const FormDoctorData = ({ selectItem }) => {
     <div className="container-doctor-data">
       <Form
         form={form}
-        className="form-enter-user"
+        className="form-personData"
         name="formDoctorData"
         initialValues={
           params.id

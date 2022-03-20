@@ -12,6 +12,7 @@ import { fetchUpdateDoctor } from "redux/middlewares/middlewaresPanelSuperAdmini
 import { useSelector, useDispatch } from "react-redux";
 import { exit_edit_mode, on_edit_mode } from "redux/actions/createActions";
 import { useNavigate, useParams } from "react-router-dom";
+import { fetchVerifyAuthUser } from "redux/middlewares/fetchVerifyAuthUser";
 
 const AddNewDoctorPage = () => {
   const { selectStaff, selectedAddStuff } = useSelector(
@@ -25,6 +26,7 @@ const AddNewDoctorPage = () => {
   const [valueForm, setValueForm] = useState({});
 
   useEffect(() => {
+    dispatch(fetchVerifyAuthUser());
     if (params.id) {
       dispatch(fetchDoctorById(params.id));
       dispatch(on_edit_mode);

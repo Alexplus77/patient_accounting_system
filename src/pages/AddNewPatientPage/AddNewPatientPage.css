@@ -1,10 +1,18 @@
+.container-addPatient-page{
+    display: grid;
+    align-items: center;
+    grid-auto-flow: column;
+    padding: 10px;
+    color:white;
 
+}
 
 .container-forms-addPatient{
     display: grid;
-   margin-left: 50px;
-   grid-template-columns: repeat(3, 400px);
-    grid-template-rows: 500px auto;
+   justify-items: center;
+    justify-self: center;
+    width: 100%;
+ grid-auto-flow: column;
     gap: 20px;
 
 }

@@ -1,21 +1,26 @@
 .form-enter-user{
     display: grid;
-    position: absolute;
-    width: 400px;
-    padding: 20px;
-}
-.container-form{
-margin-top: 100px;
-    position: relative;
-    width: 400px;
+    align-self: center;
     justify-self: center;
-}
-.background{
-position: fixed;
-    background-color: #242424;
+    background: rgba(36, 36, 36, 0.61);
     width: 400px;
-    height: 300px;
-    opacity: 60%;
+padding: 20px;
+}
+.icon-help{
+    font-size: 30px;
+    justify-self: right;
+    padding-bottom: 10px;
+    cursor: pointer;
+    color: #a4a3a3;
+}
+.icon-help:hover{
+    font-size: 35px;
+}
+.modal-help{
+    display: grid;
+}
+.text-help{
+    display: grid;
 }
 label{
     color: white;

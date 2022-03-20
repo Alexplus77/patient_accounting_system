@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import "./HeaderSuperAdministrator.css";
-import { add_selected_stuff } from "redux/actions/createActions";
+import { AuthUserCard } from "components/AuthUserCard";
 import { exit_edit_mode } from "redux/actions/createActions";
 import { useDispatch } from "react-redux";
 import { Menu, Button, Dropdown } from "antd";
@@ -15,12 +15,16 @@ const HeaderSuperAdministrator = () => {
   const menuList = (
     <Menu className="menu-header">
       <Menu.Item className="nav-link">
-        <NavLink onClick={handleSelectStuff} to={"/addNewDoctor"}>
+        <NavLink key={1} onClick={handleSelectStuff} to={"/addNewDoctor"}>
           Добавить врача
         </NavLink>
       </Menu.Item>
       <Menu.Item className="nav-link">
-        <NavLink onClick={handleSelectStuff} to={"/addNewAdministrator"}>
+        <NavLink
+          key={2}
+          onClick={handleSelectStuff}
+          to={"/addNewAdministrator"}
+        >
           Добавить администратора
         </NavLink>
       </Menu.Item>
@@ -32,8 +36,9 @@ const HeaderSuperAdministrator = () => {
         Список персонала
       </NavLink>
       <Dropdown className="nav-link" overlay={menuList}>
-        <div>Добавить в список персонала</div>
+        <div>Добавить в список</div>
       </Dropdown>
+      <AuthUserCard />
     </div>
   );
 };

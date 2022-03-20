@@ -3,6 +3,7 @@ import { on_edit_mode } from "redux/actions/createActions";
 import { fetchDoctorById } from "redux/middlewares/middlewaresPanelSuperAdministrator/fetchDoctorDB/fetchDoctorById";
 import { Link, useNavigate } from "react-router-dom";
 import { DeleteOutlined, EditTwoTone } from "@ant-design/icons";
+import { Tooltip, Popconfirm } from "antd";
 import { propsFilterLastName } from "components/FilterDropDown/propsFilterLastName";
 import React from "react";
 import { useDispatch } from "react-redux";
@@ -60,14 +61,22 @@ export const useColumnsTableListDoctors = () => {
       render: (record) => {
         return (
           <div className="icon-group">
-            <EditTwoTone
-              onClick={() => handleOnEditMode(record.id)}
-              className="icon"
-            />
-            <DeleteOutlined
-              onClick={() => handleRemoveDoctor(record.id)}
-              className="icon"
-            />
+            <Tooltip title={"Редактировать"}>
+              <EditTwoTone
+                onClick={() => handleOnEditMode(record.id)}
+                className="icon"
+              />
+            </Tooltip>
+            <Tooltip title={"Удалить"}>
+              <Popconfirm
+                title={"Вы уверены, что хотите удалить врача?"}
+                onConfirm={() => handleRemoveDoctor(record.id)}
+                okText="Yes"
+                cancelText="No"
+              >
+                <DeleteOutlined className="icon" />
+              </Popconfirm>
+            </Tooltip>
           </div>
         );
       },

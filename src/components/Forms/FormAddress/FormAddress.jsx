@@ -28,12 +28,11 @@ const FormAddress = ({ selectItem }) => {
   ];
 
   return (
-    <div className="container-formAddress">
-      <div className="background-form" />
-      <h2 className="title">Адрес</h2>
+    <div className="container-form-add">
+      <h2 className="title-personData">Адрес</h2>
       <Form
         form={form}
-        className="form-address"
+        className="form-personData"
         name="formAddress"
         initialValues={
           onEditMode ? selectItem?.addressData : initialValueDefault

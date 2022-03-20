@@ -3,10 +3,11 @@
     grid-auto-flow: column;
 }
 .nav-link{
-    font-size: 20px;
+    font-size: 18px;
     color: white;
+    text-align: center;
 }
 .nav-link:hover{
-    font-size: 22px;
+    font-size: 20px;
     color: #a09f9f;
 }
