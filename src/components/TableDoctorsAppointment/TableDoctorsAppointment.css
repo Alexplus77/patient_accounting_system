@@ -1,0 +1,12 @@
+.table-doctor-appointment{
+    color: white;
+}
+.rowTableAppointment{
+    background-color: black;
+}
+.container-doctors-appointment{
+    width: 500px;
+justify-self: center;
+    align-self: center;
+
+}

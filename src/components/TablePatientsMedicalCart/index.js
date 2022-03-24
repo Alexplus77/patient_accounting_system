@@ -1,0 +1,1 @@
+export { TablePatientsMedicalCart } from "./TablePatientsMedicalCart";

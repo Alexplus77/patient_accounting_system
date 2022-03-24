@@ -1,7 +1,8 @@
 import React from "react";
-import { Form, Modal, Select, DatePicker } from "antd";
+import { Form, Modal, Select, DatePicker, message } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { is_form_visible } from "redux/actions/createActions";
+import { fetchAddDoctorsAppointment } from "redux/middlewares/middlewaresPanelAdministrator/fetchAddDoctorsAppointment";
 
 const FormDoctorsAppointment = () => {
   const dispatch = useDispatch();
@@ -10,7 +11,7 @@ const FormDoctorsAppointment = () => {
   const { selectedPatient, formIsVisible } = useSelector(
     (state) => state?.storeReducer
   );
-
+  console.log(selectedPatient.id);
   return (
     <Modal
       visible={formIsVisible}
@@ -22,8 +23,16 @@ const FormDoctorsAppointment = () => {
         form
           .validateFields()
           .then((values) => {
+            console.log({ ...values, patientData: selectedPatient.id });
+            dispatch(
+              fetchAddDoctorsAppointment({
+                ...values,
+                patientData: selectedPatient.id,
+              })
+            );
+            message.success("Пациент успешно записан на прием к врачу ");
+            dispatch(is_form_visible(false));
             form.resetFields();
-            //onCreate(values);
           })
           .catch((info) => {
             console.log("Validate Failed:", info);
@@ -49,16 +58,18 @@ const FormDoctorsAppointment = () => {
           ]}
         >
           <Select>
-            {doctorsList.map(({ _id, doctorPersonalData: { personData } }) => (
-              <Select.Option key={_id} value={_id}>
-                {personData.lastName} {personData.name}
-              </Select.Option>
-            ))}
+            {doctorsList.map(
+              ({ _id, doctorPersonalData: { personData, passportData } }) => (
+                <Select.Option key={_id} value={_id}>
+                  {personData.lastName} {personData.name}
+                </Select.Option>
+              )
+            )}
           </Select>
         </Form.Item>
         <Form.Item
-          name="title"
-          label="Title"
+          name="dateAppointment"
+          label="Выберите дату и время"
           rules={[
             {
               required: true,

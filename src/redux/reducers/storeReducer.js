@@ -1,5 +1,6 @@
 import {
   FETCH_GET_PATIENTS_LIST,
+  FETCH_GET_DOCTORS_APPOINTMENT_LIST,
   FETCH_NEW_PATIENT,
   FETCH_SELECTED_PATIENT,
   ON_EDIT_MODE,
@@ -13,6 +14,7 @@ const initialState = {
   users: [],
   patientList: [],
   selectedPatient: {},
+  doctorsAppointmentList: [],
   onEditMode: false,
   errors: {},
   loading: false,
@@ -20,6 +22,8 @@ const initialState = {
 };
 const storeReducer = (state = initialState, action) => {
   switch (action.type) {
+    case FETCH_GET_DOCTORS_APPOINTMENT_LIST:
+      return { ...state, doctorsAppointmentList: action.payload };
     case FORM_IS_VISIBLE:
       return { ...state, formIsVisible: action.payload };
     case IS_LOADING:

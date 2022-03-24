@@ -1,5 +1,6 @@
 import {
   FETCH_GET_PATIENTS_LIST,
+  FETCH_GET_DOCTORS_APPOINTMENT_LIST,
   FETCH_NEW_PATIENT,
   FETCH_SELECTED_PATIENT,
   ON_EDIT_MODE,
@@ -17,6 +18,11 @@ import {
   IS_AUTH,
   FORM_IS_VISIBLE,
 } from "./actionsTypes";
+
+export const fetch_doctorsAppointmentList = (data) => ({
+  type: FETCH_GET_DOCTORS_APPOINTMENT_LIST,
+  payload: data,
+});
 export const is_form_visible = (data) => ({
   type: FORM_IS_VISIBLE,
   payload: data,

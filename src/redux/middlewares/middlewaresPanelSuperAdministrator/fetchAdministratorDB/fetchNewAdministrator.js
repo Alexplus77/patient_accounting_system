@@ -14,7 +14,7 @@ export const fetchPostAdministrator = (data) => (dispatch) => {
       dispatch(fetchNewAdministrator());
     })
     .catch((e) => {
-      // e.response.status === 403 && dispatch(log_out());
+      e.response.status === 403 && dispatch(log_out());
       errorModal(e);
     });
 };

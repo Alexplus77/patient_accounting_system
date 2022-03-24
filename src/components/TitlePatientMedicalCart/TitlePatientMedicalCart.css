@@ -1,0 +1,14 @@
+.title-patientMedicalCartPage-container{
+    display: grid;
+    grid-template-rows: 70px 70px auto;
+}
+.title-patientMedicalCartPage{
+    display: grid;
+    grid-auto-flow: column;
+    gap: 20px;
+    color: white;
+    margin-top: 50px;
+}
+.cart-patientMedicalCartPage{
+    height: 400px;
+}

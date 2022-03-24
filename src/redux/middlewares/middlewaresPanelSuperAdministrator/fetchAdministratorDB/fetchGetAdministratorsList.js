@@ -13,7 +13,7 @@ export const fetchGetAdministratorsList = () => (dispatch) => {
       dispatch(fetchAdministratorsList(data));
     })
     .catch((e) => {
-      // e.response.status === 403 && dispatch(log_out());
+      e.response.status === 403 && dispatch(log_out());
       errorModal(e);
     });
 };

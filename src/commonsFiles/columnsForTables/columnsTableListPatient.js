@@ -101,7 +101,7 @@ export const useColumnsTableListPatients = () => {
       render: (text, record) => {
         return (
           <div className="icon-group">
-            <Tooltip title={"Редактировать"}>
+            <Tooltip title={"Записать к врачу"}>
               <EditTwoTone
                 className="icon"
                 onClick={() => handleDoctorsAppointment(record)}

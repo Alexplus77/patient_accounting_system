@@ -9,7 +9,7 @@ export const fetchDeleteDoctor = (id) => (dispatch) => {
     })
     .then(({ data }) => dispatch(fetch_selected_stuff(data)))
     .catch((e) => {
-      // e.response.status === 403 && dispatch(log_out());
+      e.response.status === 403 && dispatch(log_out());
       errorModal(e);
     });
 };

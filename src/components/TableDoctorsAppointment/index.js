@@ -1,0 +1,1 @@
+export { TableDoctorsAppointment } from "./TableDoctorAppointment";

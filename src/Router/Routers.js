@@ -10,13 +10,30 @@ import { AddNewAdministratorPage } from "pages/AddNewAdministratorPage";
 import { DoctorCardPage } from "pages/DoctorCardPage";
 import { AdministratorCardPage } from "pages/AdministratorCardPage";
 import { RequiredAuth } from "hocs/RequiredAuth";
+import { DoctorPage } from "pages/DoctorPage";
+import { PatientsMedicalCartPage } from "pages/PatientsMedicalCartPage";
 
 const Routers = () => {
   return (
     <Routes>
       <Route path={"/"} element={<Layout />}>
         <Route index element={<MainPage />} />
-
+        <Route
+          path={"/medicalCardId:id"}
+          element={
+            <RequiredAuth>
+              <PatientsMedicalCartPage />
+            </RequiredAuth>
+          }
+        />
+        <Route
+          path={"/pageDoctorId:id"}
+          element={
+            <RequiredAuth>
+              <DoctorPage />
+            </RequiredAuth>
+          }
+        />
         <Route
           path={"/administrator"}
           element={

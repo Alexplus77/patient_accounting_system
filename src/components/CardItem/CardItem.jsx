@@ -12,7 +12,10 @@ export const CardItem = ({
   selectedItem,
   id,
 }) => {
-  const { loading } = useSelector((state) => state.storeReducer);
+  const { loading } = useSelector((state) => state?.storeReducer);
+  const {
+    authUser: { role },
+  } = useSelector((state) => state?.stuffReducer);
   return (
     <div className="card-container">
       <div className="background-card" />
@@ -55,10 +58,18 @@ export const CardItem = ({
           );
         })}
         <div className="btns-patient-card">
-          <Button className="btn" onClick={() => handleOnEditMode(id)}>
+          <Button
+            hidden={role !== "admin"}
+            className="btn"
+            onClick={() => handleOnEditMode(id)}
+          >
             Изменить
           </Button>
-          <Button className="btn" onClick={() => handleRemovePatient(id)}>
+          <Button
+            hidden={role !== "admin"}
+            className="btn"
+            onClick={() => handleRemovePatient(id)}
+          >
             Удалить
           </Button>{" "}
           <Button className="btn" style={{ width: "100px" }}>

@@ -1,0 +1,1 @@
+export { TitlePatientMedicalCart } from "./TitlePatientMedicalCart";

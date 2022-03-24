@@ -1,0 +1,15 @@
+.table-medicalPatientCart-container{
+    display: grid;
+}
+.table-medicalCart{
+    display: grid;
+    grid-auto-flow: column;
+    width: fit-content;
+    justify-self: center;
+    gap: 10px;
+}
+.btn-group-tableMedicalCart{
+    display: grid;
+    height: fit-content;
+    gap: 10px;
+}

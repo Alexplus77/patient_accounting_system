@@ -19,7 +19,7 @@ export const fetchUpdatePatient = (id, newData) => (dispatch) => {
       dispatch(exit_edit_mode());
     })
     .catch((e) => {
-      // e.response.status === 403 && dispatch(log_out());
+      e.response.status === 403 && dispatch(log_out());
       errorModal(e);
     });
 };
