@@ -1,17 +1,17 @@
 const mongoose = require("mongoose");
 
-const schemaPatient = mongoose.Schema({
-  patientPersonalData: {
+const schemaDoctor = mongoose.Schema({
+  doctorPersonalData: {
     personData: {
       lastName: String,
       name: String,
       patronymic: String,
       dateOfBirth: Date,
       phoneNumber: Number,
-      sex: String,
-
-      groupClient: String,
-      doctor: String,
+      role: String,
+      specialization: String,
+      diploma: String,
+      numberOfDiploma: String,
     },
     addressData: {
       index: Number,
@@ -27,9 +27,10 @@ const schemaPatient = mongoose.Schema({
       numberDoc: String,
       issuedByWhom: String,
       dateOfIssue: Date,
+      login: { type: String, unique: true },
+      password: { type: String, unique: true },
     },
   },
-  patientTreatData: {},
 });
 
-module.exports = mongoose.model("PatientModel", schemaPatient);
+module.exports = mongoose.model("DoctorModel", schemaDoctor);

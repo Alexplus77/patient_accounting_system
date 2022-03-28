@@ -1,4 +1,4 @@
-const PatientModel = require("../Models/PatientsListModel");
+const PatientModel = require("../../Models/PatientsListModel");
 
 exports.controller_getPatientList = async (req, res) => {
   await PatientModel.find({}, (err, data) => {

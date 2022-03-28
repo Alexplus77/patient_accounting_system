@@ -1,4 +1,4 @@
-const PatientModel = require("../Models/PatientsListModel");
+const PatientModel = require("../../Models/PatientsListModel");
 const mongoose = require("mongoose");
 exports.controllerAddNewPatient = async (req, res) => {
   try {

@@ -1,4 +1,4 @@
-const PatientModel = require("../Models/PatientsListModel");
+const PatientModel = require("../../Models/PatientsListModel");
 
 exports.controller_getPatient_byId = (req, res) => {
   PatientModel.findById(req.params.id, (err, data) => {
